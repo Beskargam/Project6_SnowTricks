@@ -23,14 +23,15 @@
         "symfony/validator": "4.1.*",
         "symfony/web-link": "4.1.*",
         "symfony/web-server-bundle": "4.1.*",
-        "symfony/yaml": "4.1.*"
+        "symfony/yaml": "4.1.*",
+        "twbs/bootstrap": "4.1.3"
     },
     "require-dev": {
         "sensiolabs/security-checker": "^5.0",
-        "symfony/debug-pack": "*",
+        "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "4.1.*",
         "symfony/maker-bundle": "^1.0",
-        "symfony/profiler-pack": "*",
+        "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*"
     },
     "config": {
