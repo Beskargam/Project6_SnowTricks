@@ -10,9 +10,9 @@ namespace App\Controller;
 
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
     /**
      * @Route("/")
@@ -20,6 +20,6 @@ class ArticleController
 
     public function homepage()
     {
-        return new Response('OMG ! My first page is the Homepage !');
+        return $this->render('home/home.html.twig');
     }
 }
