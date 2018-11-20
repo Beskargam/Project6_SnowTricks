@@ -20,9 +20,17 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @Route("/figures", name="tricksList")
+     */
+    public function trickList()
+    {
+        return $this->render('trick/tricksList.html.twig');
+    }
+
+    /**
      * @Route("/figure/{id}", name="trick")
      */
-    public function view($id)
+    public function trickView($id)
     {
         return $this->render('trick/trick.html.twig');
     }
