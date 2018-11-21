@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Trick;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -16,7 +17,17 @@ class ArticleController extends AbstractController
      */
     public function homepage()
     {
-        return $this->render('home/home.html.twig');
+        $tricksList = $this->getDoctrine()
+            ->getRepository(Trick::class)
+            ->findAll();
+
+        if (!$tricksList) {
+            throw $this->createNotFoundException('Aucun Trick trouvé !');
+        }
+
+        return $this->render('home/home.html.twig', [
+            'trickList' => $tricksList
+        ]);
     }
 
     /**
@@ -24,7 +35,17 @@ class ArticleController extends AbstractController
      */
     public function trickList()
     {
-        return $this->render('trick/tricksList.html.twig');
+        $tricksList = $this->getDoctrine()
+            ->getRepository(Trick::class)
+            ->findAll();
+
+        if (!$tricksList) {
+            throw $this->createNotFoundException('Aucun Trick trouvé !');
+        }
+
+        return $this->render('trick/tricksList.html.twig', [
+            'trickList' => $tricksList
+        ]);
     }
 
     /**
@@ -32,7 +53,17 @@ class ArticleController extends AbstractController
      */
     public function trickView($id)
     {
-        return $this->render('trick/trick.html.twig');
+        $trick = $this->getDoctrine()
+            ->getRepository(Trick::class)
+            ->find($id);
+
+        if (!$trick) {
+            throw $this->createNotFoundException('Le Trick ' .$id. ' n\'existe pas');
+        }
+
+        return $this->render('trick/trick.html.twig', [
+            'trick' => $trick
+        ]);
     }
 
     /**
@@ -47,6 +78,14 @@ class ArticleController extends AbstractController
      * @Route("/editer/{id}", name="edit")
      */
     public function edit($id)
+    {
+        return $this->render('trick/edit.html.twig');
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete($id)
     {
         return $this->render('trick/edit.html.twig');
     }
