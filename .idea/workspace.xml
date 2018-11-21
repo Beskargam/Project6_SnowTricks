@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fac73ce4-b8a7-4b37-a098-69a76d881873" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/src/Entity/GroupTrick.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Entity/Trick.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Repository/GroupTrickRepository.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Repository/TrickRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+=======
+<<<<<<< Updated upstream
+      <change afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/javascript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/navigation.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/trick/tricksList.html.twig" afterDir="false" />
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,11 +97,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/ArticleController.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="391">
+=======
+<<<<<<< Updated upstream
+            <state relative-caret-position="347">
+>>>>>>> Stashed changes
               <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+=======
+            <state relative-caret-position="391">
+              <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#35#94#0#PHP" expanded="true" />
               </folding>
@@ -165,17 +184,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/GroupTrick.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+            <state relative-caret-position="85">
+              <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+=======
+>>>>>>> Stashed changes
             <state relative-caret-position="323">
               <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="true">
+=======
+      <file pinned="false" current-in-tab="false">
+>>>>>>> Stashed changes
         <entry file="file://$PROJECT_DIR$/src/Migrations/Version20181121125953.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="425">
               <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -447,15 +481,34 @@
       <workItem from="1542378122267" duration="7138000" />
       <workItem from="1542535546975" duration="2017000" />
       <workItem from="1542617622043" duration="8649000" />
+<<<<<<< Updated upstream
       <workItem from="1542702611981" duration="4970000" />
       <workItem from="1542720627245" duration="2809000" />
       <workItem from="1542791525767" duration="599000" />
       <workItem from="1542804125974" duration="1702000" />
+=======
+<<<<<<< Updated upstream
+      <workItem from="1542702611981" duration="4246000" />
+=======
+      <workItem from="1542702611981" duration="4970000" />
+      <workItem from="1542720627245" duration="2809000" />
+      <workItem from="1542791525767" duration="599000" />
+      <workItem from="1542804125974" duration="2305000" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="41211000" />
+=======
+<<<<<<< Updated upstream
+    <option name="totallyTimeSpent" value="35377000" />
+=======
+    <option name="totallyTimeSpent" value="41814000" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
@@ -514,6 +567,7 @@
     <entry file="file://$PROJECT_DIR$/public/css/styles.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/public/js/javascript.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -528,8 +582,20 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
       <provider selected="true" editor-type-id="text-editor" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/navigation.html.twig">
+=======
+    <entry file="file://$PROJECT_DIR$/templates/trick/tricksList.html.twig">
+>>>>>>> Stashed changes
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="10" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+        </state>
+      </provider>
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ArticleController.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -601,6 +667,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/ArticleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <element signature="e#35#94#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
