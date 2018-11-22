@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="fac73ce4-b8a7-4b37-a098-69a76d881873" name="Default Changelist" comment="">
 <<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/src/Entity/GroupTrick.php" afterDir="false" />
@@ -16,6 +17,12 @@
       <change afterPath="$PROJECT_DIR$/templates/trick/tricksList.html.twig" afterDir="false" />
 =======
 >>>>>>> Stashed changes
+>>>>>>> Stashed changes
+=======
+    <list default="true" id="cfc525ae-b78f-4f61-9c8a-5183bcafe36c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Migrations/Version20181122154319.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
 >>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -473,6 +480,7 @@
       <created>1542291465681</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< Updated upstream
       <updated>1542291465681</updated>
       <workItem from="1542291469956" duration="882000" />
       <workItem from="1542292417999" duration="521000" />
@@ -496,10 +504,17 @@
       <workItem from="1542804125974" duration="2305000" />
 >>>>>>> Stashed changes
 >>>>>>> Stashed changes
+=======
+      <updated>1542823044728</updated>
+      <workItem from="1542823047379" duration="218000" />
+      <workItem from="1542875473815" duration="2785000" />
+      <workItem from="1542899630597" duration="2106000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="41211000" />
 =======
@@ -508,6 +523,9 @@
 =======
     <option name="totallyTimeSpent" value="41814000" />
 >>>>>>> Stashed changes
+>>>>>>> Stashed changes
+=======
+    <option name="totallyTimeSpent" value="5109000" />
 >>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
