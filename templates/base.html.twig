@@ -13,8 +13,8 @@
             <a class="navbar-brand" href="{{ path('app_homepage') }}"><img src="{{ asset('images/logo.png') }}" style="height: 30px; width: 30px"></a>
             <a class="navbar-brand" href="{{ path('app_homepage') }}">Home</a>|
             <a class="navbar-brand" href="{{ path('app_tricksList') }}">Tricks</a>|
-            <a class="navbar-brand" href="#">Sign in</a>|
-            <a class="navbar-brand" href="#">Sign up</a>
+            <a class="navbar-brand" href="{{ path('app_login') }}">Connexion</a>|
+            <a class="navbar-brand" href="#">S'enregistrer</a>
         </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}
