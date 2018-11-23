@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Cet Email est déjà utilisé")
+ * @UniqueEntity(fields="username", message="Ce nom d'utilisateur est déjà utilisé")
  */
 class User implements UserInterface
 {
@@ -19,6 +23,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
@@ -28,15 +34,29 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
-     */
-    private $password;
-
-    /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 30,
+     *      minMessage = "Votre nom d'utilisateur doit comporter au minimum {{ limit }} charactères",
+     *      maxMessage = "Votre nom d'utilisateur ne peut comporter plus de {{ limit }} charactères"
+     * )
      */
     private $username;
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank
+     */
+    private $password;
 
     public function getId(): ?int
     {
@@ -119,6 +139,18 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
