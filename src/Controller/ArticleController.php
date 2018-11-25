@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Trick;
+use App\Repository\TrickRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,10 +34,9 @@ class ArticleController extends AbstractController
     /**
      * @Route("/figures", name="tricksList")
      */
-    public function trickList()
+    public function trickList(TrickRepository $trickRepository)
     {
-        $tricksList = $this->getDoctrine()
-            ->getRepository(Trick::class)
+        $tricksList = $trickRepository
             ->findAll();
 
         if (!$tricksList) {
@@ -51,16 +51,8 @@ class ArticleController extends AbstractController
     /**
      * @Route("/figure/{id}", name="trick")
      */
-    public function trickView($id)
+    public function trickView(Trick $trick)
     {
-        $trick = $this->getDoctrine()
-            ->getRepository(Trick::class)
-            ->find($id);
-
-        if (!$trick) {
-            throw $this->createNotFoundException('Le Trick ' .$id. ' n\'existe pas');
-        }
-
         return $this->render('trick/trick.html.twig', [
             'trick' => $trick
         ]);
@@ -77,16 +69,20 @@ class ArticleController extends AbstractController
     /**
      * @Route("/editer/{id}", name="edit")
      */
-    public function edit($id)
+    public function edit(Trick $trick)
     {
-        return $this->render('trick/edit.html.twig');
+        return $this->render('trick/edit.html.twig', [
+            'trick' => $trick
+        ]);
     }
 
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete($id)
+    public function delete(Trick $trick)
     {
-        return $this->render('trick/edit.html.twig');
+        return $this->render('trick/edit.html.twig', [
+            'trick' => $trick
+        ]);
     }
 }

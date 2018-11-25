@@ -31,7 +31,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ['ROLE_USER'];
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -53,8 +53,7 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
