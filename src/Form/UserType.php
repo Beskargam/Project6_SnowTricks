@@ -24,20 +24,20 @@ class UserType extends AbstractType
             ->add('username', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Username'
+                    'placeholder' => 'Pseudo'
                 ]])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'Password'
+                        'placeholder' => 'Mot de passe'
                     ]
                 ],
                 'second_options' => [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'Repeat Password'
+                        'placeholder' => 'Contfirmer mot de passe'
                     ]
                 ],
             ]);
