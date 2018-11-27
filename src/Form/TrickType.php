@@ -13,6 +13,7 @@ use App\Entity\GroupTrick;
 use App\Entity\Trick;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,6 @@ class TrickType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Nom du Trick :',
-                'help' => "Veillez à ce que le Trick n'existe pas déjà",
                 'attr' => [
                     'placeholder' => false,
                 ]])
@@ -38,6 +38,9 @@ class TrickType extends AbstractType
                 'label' => 'Catégorie du Trick :',
                 'class' => GroupTrick::class,
                 'choice_label' => 'name',
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrement',
             ]);
     }
 

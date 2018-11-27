@@ -72,9 +72,14 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
             $entityManager->persist($trick);
             $entityManager->flush();
+
+            $this->addFlash('notice', 'Le Trick a bien été enregistré.');
+
+            return $this->render('trick/trick.html.twig', [
+               'id' => $trick->getId(),
+            ]);
         }
 
         return $this->render('trick/add.html.twig', [

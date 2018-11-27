@@ -1,0 +1,23 @@
+<div class="box-form">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="field-space">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="field-space">
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content) }}
+    </div>
+    <div class="field-space">
+        {{ form_label(form.groupTrick) }}
+        {{ form_widget(form.groupTrick) }}
+    </div>
+
+    <div class="field-space">
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+    <div class="field-space">
+        {{ form_rest(form) }}
+    </div>
+    {{ form_end(form) }}
+</div>
