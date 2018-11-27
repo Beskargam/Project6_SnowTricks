@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @UniqueEntity(fields="title", message="Ce Tricks existe déjà")
  */
 class Trick
 {
@@ -18,11 +21,19 @@ class Trick
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Le Trick doit avoir un Nom")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 30,
+     *      minMessage = "Le nom du Trick doit comporter au minimum {{ limit }} charactères",
+     *      maxMessage = "Le nom du Trick ne peut comporter plus de {{ limit }} charactères"
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Le Trick doit avoir une description")
      */
     private $content;
 

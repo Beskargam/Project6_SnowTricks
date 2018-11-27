@@ -11,7 +11,7 @@
                     <h1 class="h3 mb-3 font-weight-normal">Enregistrement</h1>
 
                     <div class="login-form">
-                        {{ form_start(form) }}
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <div class="field-space">
                             {{ form_label(form.username) }}
                             {{ form_widget(form.username) }}
@@ -36,11 +36,12 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 {% endblock %}

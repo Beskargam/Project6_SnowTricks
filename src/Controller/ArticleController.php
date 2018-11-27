@@ -4,9 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\Trick;
+use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/", name="app_")
@@ -61,9 +63,23 @@ class ArticleController extends AbstractController
     /**
      * @Route("/ajouter", name="add")
      */
-    public function add()
+    public function add(Request $request)
     {
-        return $this->render('trick/add.html.twig');
+        $trick = new Trick();
+        $form = $this->createForm(TrickType::class, $trick);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->persist($trick);
+            $entityManager->flush();
+        }
+
+        return $this->render('trick/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**

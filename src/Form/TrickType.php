@@ -13,6 +13,7 @@ use App\Entity\GroupTrick;
 use App\Entity\Trick;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,20 +24,21 @@ class TrickType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => false,
+                'label' => 'Nom du Trick :',
+                'help' => "Veillez à ce que le Trick n'existe pas déjà",
                 'attr' => [
-                    'placeholder' => 'Nom'
+                    'placeholder' => false,
                 ]])
-            ->add('content', TextType::class, [
-                'label' => false,
+            ->add('content', TextareaType::class, [
+                'label' => 'Description du Trick :',
                 'attr' => [
-                    'placeholder' => 'Description'
+                    'placeholder' => false,
                 ]])
-            ->add('Categories', EntityType::class, [
+            ->add('groupTrick', EntityType::class, [
+                'label' => 'Catégorie du Trick :',
                 'class' => GroupTrick::class,
                 'choice_label' => 'name',
-            ])
-            ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
