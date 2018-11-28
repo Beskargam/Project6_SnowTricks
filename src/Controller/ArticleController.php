@@ -51,7 +51,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/figure/{id}", name="trick")
+     * @Route("/figure/{id<\d+>}", name="trick")
      */
     public function trickView(Trick $trick)
     {
@@ -70,12 +70,12 @@ class ArticleController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() AND $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
             $entityManager->flush();
 
-            $this->addFlash('notice', 'Le Trick a bien été enregistré.');
+            $this->addFlash('success', 'Le Trick a bien été enregistré.');
 
             return $this->render('trick/trick.html.twig', [
                'id' => $trick->getId(),
@@ -88,22 +88,51 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/editer/{id}", name="edit")
+     * @Route("/editer/{id<\d+>}", name="edit")
      */
-    public function edit(Trick $trick)
+    public function edit(Request $request, Trick $trick)
     {
+        $form = $this->createForm(TrickType::class, $trick);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Le Trick a bien été modifié.');
+
+            return $this->render('trick/trick.html.twig', [
+                'id' => $trick->getId(),
+            ]);
+        }
+
         return $this->render('trick/edit.html.twig', [
-            'trick' => $trick
+            'form' => $form->createView(),
+            'trick' => $trick,
         ]);
     }
 
     /**
-     * @Route("/delete/{id}", name="delete")
+     * @Route("/delete/{id<\d+>}", methods={"POST"}, name="delete")
      */
-    public function delete(Trick $trick)
+    public function delete(Request $request, Trick $trick)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form = $this->get('form.factory')->create();
+
+        if ($request->isMethod('POST') AND $form->handleRequest($request)->isValid()) {
+            $entityManager->remove($trick);
+            $entityManager->flush();
+
+            $this->addFlash('notice', 'Le Trick a bien été supprimé.');
+
+            return $this->redirectToRoute('app_homepage');
+        }
+
         return $this->render('trick/edit.html.twig', [
-            'trick' => $trick
+            'trick' => $trick,
+            'form' => $form->createView(),
         ]);
     }
 }
