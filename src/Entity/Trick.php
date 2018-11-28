@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -52,6 +53,13 @@ class Trick
      * @ORM\JoinColumn(nullable=false)
      */
     private $groupTrick;
+
+    /**
+     * @Assert\Image(
+     *     allowPortrait = false
+     * )
+     */
+    protected $image;
 
     public function getId(): ?int
     {
@@ -116,5 +124,15 @@ class Trick
         $this->groupTrick = $groupTrick;
 
         return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage(File $file = null): self
+    {
+        $this->image = $file;
     }
 }

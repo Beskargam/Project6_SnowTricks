@@ -1,15 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Supprimer Trick
+    Supprimer un Trick
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>Edit Trick</h1>
+    <section class="flipboard-box">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-6 col-lg-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Supprimer un Trick</h1>
+                    <p>
+                        Etes-vous sûr de vouloir supprimer le Trick "{{ Trick.title }}" ?
+                    </p>
+                    <form action="{{ path('app_delete', {'id' : Trick.id}) }}" method="post">
+                        <a href="{{ path('app_trick', {'id': Trick.id}) }}" class="btn btn-default">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Retour au Trick
+                        </a>
+                        <input type="submit" value="Supprimer" class="btn btn-danger"/>
+                        {{ form_rest(form) }}
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}

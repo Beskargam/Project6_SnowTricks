@@ -113,7 +113,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/supprimer/{id<\d+>}", methods={"POST"}, name="delete")
+     * @Route("/supprimer/{id<\d+>}", name="delete")
      */
     public function delete(Request $request, Trick $trick)
     {
@@ -130,7 +130,7 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('app_homepage');
         }
 
-        return $this->render('trick/edit.html.twig', [
+        return $this->render('trick/delete.html.twig', [
             'trick' => $trick,
             'form' => $form->createView(),
         ]);

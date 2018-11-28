@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>Modifier Trick</h1>
+    <section class="flipboard-box">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-6 col-lg-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Ajouter un Trick</h1>
 
-                {{ include('trick/form.html.twig') }}
+                    {{ include('trick/form.html.twig') }}
 
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}
