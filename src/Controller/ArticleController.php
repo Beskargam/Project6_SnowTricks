@@ -88,7 +88,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/editer/{id<\d+>}", name="edit")
+     * @Route("/modifier/{id<\d+>}", name="edit")
      */
     public function edit(Request $request, Trick $trick)
     {
@@ -113,7 +113,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id<\d+>}", methods={"POST"}, name="delete")
+     * @Route("/supprimer/{id<\d+>}", methods={"POST"}, name="delete")
      */
     public function delete(Request $request, Trick $trick)
     {
