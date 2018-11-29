@@ -8,6 +8,7 @@ use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -71,6 +72,18 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
+            $file = $trick->getImage();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('uploaded_image_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                throw $this->createNotFoundException('Il y a eu un problème lors de l\'envoie de l\'image.');
+            }
+            $trick->setImage($fileName);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);
             $entityManager->flush();
@@ -85,6 +98,14 @@ class ArticleController extends AbstractController
         return $this->render('trick/add.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
     }
 
     /**

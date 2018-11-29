@@ -134,5 +134,7 @@ class Trick
     public function setImage(File $file = null): self
     {
         $this->image = $file;
+
+        return $this;
     }
 }
