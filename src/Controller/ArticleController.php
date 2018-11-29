@@ -72,6 +72,8 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
+
+            /*
             $file = $trick->getImage();
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
             try {
@@ -83,6 +85,7 @@ class ArticleController extends AbstractController
                 throw $this->createNotFoundException('Il y a eu un problème lors de l\'envoie de l\'image.');
             }
             $trick->setImage($fileName);
+            */
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trick);

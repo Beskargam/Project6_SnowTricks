@@ -61,6 +61,11 @@ class Trick
      */
     protected $image;
 
+    public function __construct()
+    {
+        $this->publishedAt = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
