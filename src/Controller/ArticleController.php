@@ -25,10 +25,6 @@ class ArticleController extends AbstractController
             ->getRepository(Trick::class)
             ->findAll();
 
-        if (!$tricksList) {
-            throw $this->createNotFoundException('Aucun Trick trouvé !');
-        }
-
         return $this->render('home/home.html.twig', [
             'trickList' => $tricksList
         ]);

@@ -11,10 +11,10 @@
                 <div class="col-sm-10 col-md-6 col-lg-4">
                     <h1 class="h3 mb-3 font-weight-normal">Supprimer un Trick</h1>
                     <p>
-                        Etes-vous sûr de vouloir supprimer le Trick "{{ Trick.title }}" ?
+                        Etes-vous sûr de vouloir supprimer le Trick "{{ trick.title }}" ?
                     </p>
-                    <form action="{{ path('app_delete', {'id' : Trick.id}) }}" method="post">
-                        <a href="{{ path('app_trick', {'id': Trick.id}) }}" class="btn btn-default">
+                    <form action="{{ path('app_delete', {'id' : trick.id}) }}" method="post">
+                        <a href="{{ path('app_trick', {'id': trick.id}) }}" class="btn btn-default">
                             <i class="glyphicon glyphicon-chevron-left"></i>
                             Retour au Trick
                         </a>

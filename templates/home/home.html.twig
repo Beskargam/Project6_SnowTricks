@@ -16,8 +16,28 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            
-        </div>
+        <section>
+            <div class="row d-flex justify-content-around">
+                {% for trick in trickList %}
+                    <div class="col-sm-12 col-md-3 col-lg-2">
+                        <div class="card home-card">
+                            <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <a class="test" href="{{ path('app_trick', {'id' : trick.id}) }}">{{ trick.title }}</a>
+                                <a class="test" href="{{ path('app_edit', {'id' : trick.id}) }}"><span
+                                            class="oi oi-pencil"></span></a>
+                                <a class="test" href="{{ path('app_delete', {'id' : trick.id}) }}"><span
+                                            class="oi oi-trash"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>
+                        Aucun Trick publié pour le moment.
+                    </p>
+                {% endfor %}
+            </div>
+        </section>
     </div>
 {% endblock %}
