@@ -2,6 +2,9 @@
     border: 1px red solid;
 }
 /* ++++ Styles ++++ */
+.body-box {
+    background-color: white;
+}
 
 /* Navigation */
 .navbar-brand {
