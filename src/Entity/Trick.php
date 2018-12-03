@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -55,15 +57,14 @@ class Trick
     private $groupTrick;
 
     /**
-     * @Assert\Image(
-     *     allowPortrait = false
-     * )
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", orphanRemoval=true)
      */
-    protected $image;
+    private $image;
 
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
+        $this->image = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,14 +132,33 @@ class Trick
         return $this;
     }
 
-    public function getImage()
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImage(): Collection
     {
         return $this->image;
     }
 
-    public function setImage(File $file = null): self
+    public function addImage(Image $image): self
     {
-        $this->image = $file;
+        if (!$this->image->contains($image)) {
+            $this->image[] = $image;
+            $image->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->image->contains($image)) {
+            $this->image->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getTrick() === $this) {
+                $image->setTrick(null);
+            }
+        }
 
         return $this;
     }
