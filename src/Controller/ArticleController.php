@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
@@ -52,8 +53,13 @@ class ArticleController extends AbstractController
      */
     public function trickView(Trick $trick)
     {
+        $commentList = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findAll();
+
         return $this->render('trick/trick.html.twig', [
-            'trick' => $trick
+            'trick' => $trick,
+            'commentList' => $commentList,
         ]);
     }
 

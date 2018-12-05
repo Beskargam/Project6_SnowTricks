@@ -44,8 +44,26 @@
             Ici sera le formulaire de commentaire
         </p>
         <hr>
+        {% if comment is defined %}
+            {% for comment in commentList %}
+                <div class="col-sm-12 col-md-3 col-lg-2">
+                    <div class="card home-card">
+                        <div class="card-header">
+                            {{ comment.user.username }}
+                        </div>
+                        <div class="card-body">
+                            {{ comment.content }}
+                        </div>
+                        <div class="card-footer">
+                            {{ comment.publishedAt }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
         <p>
-            Ici sera la liste des commentaires
+            Aucun commentaire. Soyez le premier à en écrire un !
         </p>
+        {% endif %}
     </div>
 {% endblock %}
