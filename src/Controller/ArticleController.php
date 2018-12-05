@@ -6,9 +6,9 @@ namespace App\Controller;
 use App\Entity\Trick;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -60,37 +60,34 @@ class ArticleController extends AbstractController
     /**
      * @Route("/ajouter", name="add")
      */
-    public function add(Request $request)
+    public function add(EntityManagerInterface $manager, Request $request)
     {
-        $trick = new Trick();
-        $form = $this->createForm(TrickType::class, $trick);
-
+        $form = $this->createForm(TrickType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
 
-            /*
-            $file = $trick->getImage();
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-            try {
-                $file->move(
-                    $this->getParameter('uploaded_image_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
-                throw $this->createNotFoundException('Il y a eu un problème lors de l\'envoie de l\'image.');
-            }
-            $trick->setImage($fileName);
-            */
+            $path = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
+            $trick = $form->getData();
+            $image = $trick->getImage();
+            $file = $image->getFile();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($trick);
-            $entityManager->flush();
+            $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
+            
+            $file->move($path, $name);
+            $image->setName($name);
 
-            $this->addFlash('success', 'Le Trick a bien été enregistré.');
+            $manager->persist($trick);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Le Trick a bien été enregistré.'
+            );
 
             return $this->render('trick/trick.html.twig', [
-               'id' => $trick->getId(),
+                'id' => $trick->getId(),
+                'trick' => $trick,
             ]);
         }
 
@@ -110,20 +107,20 @@ class ArticleController extends AbstractController
     /**
      * @Route("/modifier/{id<\d+>}", name="edit")
      */
-    public function edit(Request $request, Trick $trick)
+    public function edit(EntityManagerInterface $manager, Request $request, Trick $trick)
     {
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $manager->persist($trick);
+            $manager->flush();
 
             $this->addFlash('success', 'Le Trick a bien été modifié.');
 
             return $this->render('trick/trick.html.twig', [
                 'id' => $trick->getId(),
-                'trick' => $trick,
             ]);
         }
 

@@ -8,9 +8,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-
-                <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
-                     alt="Card image cap">
+                {% if trick.image.name is defined %}
+                    <img src="{{ asset('uploads/images/')~trick.image.name }}">
+                {% else %}
+                    <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
+                         alt="Card image cap">
+                {% endif %}
             </div>
         </div>
         <div class="row">
@@ -30,9 +33,9 @@
                     Groupe :
                 </div>
                 {% if trick.updatedAt is defined %}
-                <div class="trick-info-box">
-                    Mise à jour le : {{ trick.updatedAt|date('d/m/Y') }}
-                </div>
+                    <div class="trick-info-box">
+                        Mise à jour le : {{ trick.updatedAt|date('d/m/Y') }}
+                    </div>
                 {% endif %}
             </div>
         </div>

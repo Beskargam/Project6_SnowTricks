@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -57,14 +56,14 @@ class Trick
     private $groupTrick;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      */
     private $image;
 
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
-        $this->image = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -132,34 +131,13 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return Collection|Image[]
-     */
-    public function getImage(): Collection
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function addImage(Image $image): self
+    public function setImage($image): void
     {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
-            $image->setTrick($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): self
-    {
-        if ($this->image->contains($image)) {
-            $this->image->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getTrick() === $this) {
-                $image->setTrick(null);
-            }
-        }
-
-        return $this;
+        $this->image = $image;
     }
 }

@@ -21,8 +21,12 @@
                 {% for trick in trickList %}
                     <div class="col-sm-12 col-md-3 col-lg-2">
                         <div class="card home-card">
-                            <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
-                                 alt="Card image cap">
+                            {% if trick.image.name is defined %}
+                                <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}">
+                            {% else %}
+                                <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
+                                     alt="Card image cap">
+                            {% endif %}
                             <div class="card-body">
                                 <a class="test" href="{{ path('app_trick', {'id' : trick.id}) }}">{{ trick.title }}</a>
                                 <a class="test" href="{{ path('app_edit', {'id' : trick.id}) }}"><span

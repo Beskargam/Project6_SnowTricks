@@ -13,10 +13,8 @@
         {{ form_widget(form.groupTrick) }}
     </div>
     <div class="field-space">
-        {{ form_label(form.image) }}
-        {{ form_widget(form.image) }}
+        {{ form_row(form.image) }}
     </div>
-
     <div class="field-space">
         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
     </div>
@@ -25,3 +23,5 @@
     </div>
     {{ form_end(form) }}
 </div>
+
+{{ form(form) }}
