@@ -17,7 +17,11 @@
                                                                                style="height: 30px; width: 30px"></a>
     <a class="navbar-brand p-2" href="{{ path('app_homepage') }}">Home</a>|
     <a class="navbar-brand p-2" href="{{ path('app_tricksList') }}">Tricks</a>|
-    <a class="navbar-brand p-2" href="{{ path('app_login') }}">Connexion</a>|
+    {% if app.user.username is defined %}
+        <a class="navbar-brand p-2" href="{{ path('app_logout') }}">Déconnexion</a>|
+    {% else %}
+        <a class="navbar-brand p-2" href="{{ path('app_login') }}">Connexion</a>|
+    {% endif %}
     <a class="navbar-brand p-2" href="{{ path('user_register') }}">S'enregistrer</a>
 </nav>
 <body>

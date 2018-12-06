@@ -19,7 +19,7 @@ class Comment
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    private $commentContent;
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,16 +37,14 @@ class Comment
         return $this->id;
     }
 
-    public function getContent(): ?string
+    public function getCommentContent()
     {
-        return $this->content;
+        return $this->commentContent;
     }
 
-    public function setContent(string $content): self
+    public function setCommentContent($commentContent): void
     {
-        $this->content = $content;
-
-        return $this;
+        $this->commentContent = $commentContent;
     }
 
     public function getPublishedAt(): ?\DateTimeInterface

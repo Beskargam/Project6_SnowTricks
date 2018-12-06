@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Trick;
+use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,13 +52,29 @@ class ArticleController extends AbstractController
     /**
      * @Route("/figure/{id<\d+>}", name="trick")
      */
-    public function trickView(Trick $trick)
+    public function trickView(EntityManagerInterface $manager, Request $request, Trick $trick)
     {
         $commentList = $this->getDoctrine()
             ->getRepository(Comment::class)
             ->findAll();
 
+        $form = $this->createForm(CommentType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid()) {
+            $comment = $form->getData();
+
+            $manager->persist($comment);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre message a bien été envoyé.'
+            );
+        }
+
         return $this->render('trick/trick.html.twig', [
+            'form' => $form->createView(),
             'trick' => $trick,
             'commentList' => $commentList,
         ]);

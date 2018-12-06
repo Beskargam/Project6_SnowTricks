@@ -40,9 +40,20 @@
             </div>
         </div>
         <hr>
-        <p>
-            Ici sera le formulaire de commentaire
-        </p>
+        {% if app.user.username is defined %}
+        {{ form_start(form) }}
+        <div class="field-space">
+            {{ form_row(form.comment_content) }}
+        </div>
+        <div class="field-space">
+            {{ form_widget(form.save_comment, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+        {{ form_end(form) }}
+        {% else %}
+        <div class="field-space">
+            Vous devez être connecté pour écrire un commentaire
+        </div>
+        {% endif %}
         <hr>
         {% if comment is defined %}
             {% for comment in commentList %}
@@ -61,9 +72,9 @@
                 </div>
             {% endfor %}
         {% else %}
-        <p>
-            Aucun commentaire. Soyez le premier à en écrire un !
-        </p>
+            <p>
+                Aucun commentaire. Soyez le premier à en écrire un !
+            </p>
         {% endif %}
     </div>
 {% endblock %}
