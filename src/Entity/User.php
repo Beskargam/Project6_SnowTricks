@@ -60,6 +60,12 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $resetToken;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
      */
     private $comments;
@@ -195,5 +201,15 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getResetToken(): string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): void
+    {
+        $this->resetToken = $resetToken;
     }
 }
