@@ -27,7 +27,7 @@ class Comment
     private $publishedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -66,7 +66,7 @@ class Comment
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 

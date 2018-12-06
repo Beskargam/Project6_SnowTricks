@@ -127,6 +127,7 @@ class ArticleController extends AbstractController
 
             return $this->render('trick/trick.html.twig', [
                 'id' => $trick->getId(),
+                'trick' => $trick,
             ]);
         }
 
