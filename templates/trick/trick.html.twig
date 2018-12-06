@@ -41,18 +41,21 @@
         </div>
         <hr>
         {% if app.user.username is defined %}
-        {{ form_start(form) }}
-        <div class="field-space">
-            {{ form_row(form.comment_content) }}
-        </div>
-        <div class="field-space">
-            {{ form_widget(form.save_comment, {'attr': {'class': 'btn btn-primary'}}) }}
-        </div>
-        {{ form_end(form) }}
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+            <div class="field-space">
+                {{ form_row(form.comment_content) }}
+            </div>
+            <div class="field-space">
+                {{ form_widget(form.save_comment, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+            <div class="field-space">
+                {{ form_rest(form) }}
+            </div>
+            {{ form_end(form) }}
         {% else %}
-        <div class="field-space">
-            Vous devez être connecté pour écrire un commentaire
-        </div>
+            <div class="field-space">
+                Vous devez être connecté pour écrire un commentaire
+            </div>
         {% endif %}
         <hr>
         {% if comment is defined %}
