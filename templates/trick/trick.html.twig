@@ -7,21 +7,32 @@
 {% block body %}
     <div class="container body-box">
         <div class="row">
-                {% if trick.image.name is defined %}
-                    <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}"
-                         alt="Card image cap">
-                {% else %}
-                    <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
-                         alt="Card image cap">
-                {% endif %}
+            {% if trick.image.name is defined %}
+                <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}"
+                     alt="Card image cap">
+            {% else %}
+                <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
+                     alt="Card image cap">
+            {% endif %}
         </div>
-        <div class="row">
-            <div class="trick-galery-box col-sm-12">
-                <img src="{{ asset('uploads/images/')~trick.image.name }}" style="width : 150px">
+        {% if trick.image.name is defined %}
+        <div class="row d-flex">
+            <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
+                <div class="card home-card">
+                    <img class="card-img-top card-img-zoom" src="{{ asset('uploads/images/')~trick.image.name }}"
+                         alt="Card image cap">
+                    {% if app.user.username is defined %}
+                        <div class="card-footer">
+                            <a class="float-right" href="#"><span class="oi oi-pencil"></span></a>
+                            <a class="action-icon float-right" href="#"><span class="oi oi-trash"></span></a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
+        {% endif %}
         <div class="row">
-            <div class=" col-sm-12">
+            <div class="trick-title-box col-sm-12">
                 <h1 class="display-4 text-center trick-title">{{ trick.title }}</h1>
             </div>
         </div>
