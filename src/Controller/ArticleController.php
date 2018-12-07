@@ -109,9 +109,14 @@ class ArticleController extends AbstractController
                 'Le Trick a bien été enregistré.'
             );
 
+            $commentList = $this->getDoctrine()
+                ->getRepository(Comment::class)
+                ->findAll();
+
             return $this->render('trick/trick.html.twig', [
                 'id' => $trick->getId(),
                 'trick' => $trick,
+                'commentList' => $commentList,
             ]);
         }
 
@@ -138,14 +143,29 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
+            $path = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
+            $trick = $form->getData();
+            $image = $trick->getImage();
+            $file = $image->getFile();
+
+            $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
+
+            $file->move($path, $name);
+            $image->setName($name);
+
             $manager->persist($trick);
             $manager->flush();
 
             $this->addFlash('success', 'Le Trick a bien été modifié.');
 
+            $commentList = $this->getDoctrine()
+                ->getRepository(Comment::class)
+                ->findAll();
+
             return $this->render('trick/trick.html.twig', [
                 'id' => $trick->getId(),
                 'trick' => $trick,
+                'commentList' => $commentList,
             ]);
         }
 
