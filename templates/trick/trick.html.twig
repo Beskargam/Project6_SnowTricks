@@ -7,7 +7,6 @@
 {% block body %}
     <div class="container body-box">
         <div class="row">
-            <div class="col-sm-12">
                 {% if trick.image.name is defined %}
                     <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}"
                          alt="Card image cap">
@@ -15,6 +14,10 @@
                     <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
                          alt="Card image cap">
                 {% endif %}
+        </div>
+        <div class="row">
+            <div class="trick-galery-box col-sm-12">
+                <img src="{{ asset('uploads/images/')~trick.image.name }}" style="width : 150px">
             </div>
         </div>
         <div class="row">

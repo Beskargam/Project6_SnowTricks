@@ -39,6 +39,11 @@ footer {
 }
 
 /* TRICK */
+.trick-galery-box {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .trick-title {
     background-color: deepskyblue;
     color: white;
