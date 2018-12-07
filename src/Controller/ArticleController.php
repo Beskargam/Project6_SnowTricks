@@ -109,6 +109,7 @@ class ArticleController extends AbstractController
                 'Le Trick a bien été enregistré.'
             );
 
+            $form = $this->createForm(CommentType::class);
             $commentList = $this->getDoctrine()
                 ->getRepository(Comment::class)
                 ->findAll();
@@ -116,6 +117,7 @@ class ArticleController extends AbstractController
             return $this->render('trick/trick.html.twig', [
                 'id' => $trick->getId(),
                 'trick' => $trick,
+                'form' => $form->createView(),
                 'commentList' => $commentList,
             ]);
         }
