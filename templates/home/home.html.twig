@@ -19,7 +19,7 @@
         <section>
             <div class="row d-flex">
                 {% for trick in trickList %}
-                    <div class="col-sm-12 col-md-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
                             {% if trick.image.name is defined %}
                                 <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}">
@@ -29,10 +29,13 @@
                             {% endif %}
                             <div class="card-body">
                                 <a class="" href="{{ path('app_trick', {'id' : trick.id}) }}">{{ trick.title }}</a>
-                                <a class="" href="{{ path('app_edit', {'id' : trick.id}) }}"><span
-                                            class="oi oi-pencil"></span></a>
-                                <a class="" href="{{ path('app_delete', {'id' : trick.id}) }}"><span
-                                            class="oi oi-trash"></span></a>
+                                {% if app.user.username is defined %}
+                                    <a class="float-right" href="{{ path('app_edit', {'id' : trick.id}) }}"><span
+                                                class="oi oi-pencil"></span></a>
+                                    <a class="action-icon float-right"
+                                       href="{{ path('app_delete', {'id' : trick.id}) }}"><span
+                                                class="oi oi-trash"></span></a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
