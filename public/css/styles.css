@@ -29,6 +29,12 @@ body {
 /* TRICK */
 .trick-title {
     background-color: deepskyblue;
+    color: white;
+    border-radius: 30px 30px 30px 30px;
+}
+
+.trick-content {
+    margin: 1rem;
 }
 
 .trick-info-box {

@@ -19,12 +19,12 @@
         </div>
         <div class="row">
             <div class=" col-sm-12">
-                <h1 class="display-4 text-center">{{ trick.title }}</h1>
+                <h1 class="display-4 text-center trick-title">{{ trick.title }}</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <p>
+                <p class="trick-content">
                     {{ trick.content }}
                 </p>
             </div>
@@ -43,44 +43,48 @@
             {% endif %}
         </div>
         <hr>
-        {% if app.user.username is defined %}
-            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-            <div class="field-space">
-                {{ form_row(form.comment_content) }}
-            </div>
-            <div class="field-space">
-                {{ form_widget(form.save_comment, {'attr': {'class': 'btn btn-primary'}}) }}
-            </div>
-            <div class="field-space">
-                {{ form_rest(form) }}
-            </div>
-            {{ form_end(form) }}
-        {% else %}
-            <div class="field-space">
-                Vous devez être connecté pour écrire un commentaire
-            </div>
-        {% endif %}
+        <div class="row justify-content-center">
+            {% if app.user.username is defined %}
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="field-space">
+                    {{ form_row(form.comment_content) }}
+                </div>
+                <div class="field-space">
+                    {{ form_widget(form.save_comment, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+                <div class="field-space">
+                    {{ form_rest(form) }}
+                </div>
+                {{ form_end(form) }}
+            {% else %}
+                <div class="field-space">
+                    Vous devez être connecté pour écrire un commentaire
+                </div>
+            {% endif %}
+        </div>
         <hr>
-        {% if comment is defined %}
-            {% for comment in commentList %}
-                <div class="col-sm-12 col-md-3 col-lg-2">
-                    <div class="card home-card">
-                        <div class="card-header">
-                            {{ comment.user.username }}
-                        </div>
-                        <div class="card-body">
-                            {{ comment.content }}
-                        </div>
-                        <div class="card-footer">
-                            {{ comment.publishedAt }}
+        <div class="row justify-content-center">
+            {% if comment is defined %}
+                {% for comment in commentList %}
+                    <div class="col-sm-12">
+                        <div class="card home-card">
+                            <div class="card-header">
+                                {{ comment.user.username }}
+                            </div>
+                            <div class="card-body">
+                                {{ comment.content }}
+                            </div>
+                            <div class="card-footer">
+                                {{ comment.publishedAt }}
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>
-                Aucun commentaire. Soyez le premier à en écrire un !
-            </p>
-        {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>
+                    Aucun commentaire. Soyez le premier à en écrire un !
+                </p>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
