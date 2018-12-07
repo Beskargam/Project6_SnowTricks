@@ -2,16 +2,22 @@
     border: 1px red solid;
 }
 /* ++++ Styles ++++ */
+body {
+    background-color: skyblue;
+}
+
 .body-box {
     background-color: white;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 /* Navigation */
 .navbar-brand {
-    margin: 0rem;
 }
 
 /* homepage */
 .home-card {
-
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
