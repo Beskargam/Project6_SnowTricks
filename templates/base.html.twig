@@ -14,7 +14,7 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="btn navbar-brand mr-auto p-2" href="{{ path('app_homepage') }}"><img src="{{ asset('images/logo.png') }}"
-                                                                               style="height: 30px; width: 30px"></a>
+                                                                                   style="height: 30px; width: 30px"></a>
     <a class="btn navbar-brand p-2" href="{{ path('app_homepage') }}">Home</a>|
     <a class="btn navbar-brand p-2" href="{{ path('app_tricksList') }}">Tricks</a>|
     {% if app.user.username is defined %}
@@ -39,6 +39,13 @@
 
 {% block body %}{% endblock %}
 </body>
+<footer>
+    <div class="row justify-content-center">
+        <div class="footer-text">
+            SnowTricks @ {{ 'NOW'|date('Y') }}
+        </div>
+    </div>
+</footer>
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
