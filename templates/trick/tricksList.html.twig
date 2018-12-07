@@ -25,11 +25,11 @@
                             <div class="card-body">
                                 <a class="" href="{{ path('app_trick', {'id' : trick.id}) }}">{{ trick.title }}</a>
                                 {% if app.user.username is defined %}
-                                    <a class="float-right" href="{{ path('app_edit', {'id' : trick.id}) }}"><span
-                                                class="oi oi-pencil"></span></a>
-                                    <a class="action-icon float-right"
+                                    <a class="float-right"
                                        href="{{ path('app_delete', {'id' : trick.id}) }}"><span
                                                 class="oi oi-trash"></span></a>
+                                    <a class="action-icon float-right" href="{{ path('app_edit', {'id' : trick.id}) }}"><span
+                                                class="oi oi-pencil"></span></a>
                                 {% endif %}
                             </div>
                         </div>

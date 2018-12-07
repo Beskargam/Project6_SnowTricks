@@ -14,14 +14,52 @@
         <div class="row">
             <div class="col-sm-12">
                 {% if trick.image.name is defined %}
-                    <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}"
-                         alt="Card image cap">
+                    <div class="card home-card">
+                        <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}"
+                             alt="Card image cap">
+                        <div class="card-footer">
+                            <a class="float-right" href="#">
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                            <a class="action-icon float-right" href="#">
+                                <span class="oi oi-trash"></span>
+                            </a>
+                        </div>
+                    </div>
                 {% else %}
-                    <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
-                         alt="Card image cap">
+                    <div class="card home-card">
+                        <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
+                             alt="Card image cap">
+                        <div class="card-footer">
+                            <a class="action-icon float-right" href="#">
+                                <span class="oi oi-trash"></span>
+                            </a>
+                            <a class="float-right" href="#">
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
         </div>
+        {% if trick.image.name is defined %}
+            <div class="row d-flex">
+                <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
+                    <div class="card home-card">
+                        <img class="card-img-top card-img-zoom" src="{{ asset('uploads/images/')~trick.image.name }}"
+                             alt="Card image cap">
+                        <div class="card-footer">
+                            <a class="float-right" href="#">
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                            <a class="action-icon float-right" href="#">
+                                <span class="oi oi-trash"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col-sm-12">
                 <p class="trick-content">
