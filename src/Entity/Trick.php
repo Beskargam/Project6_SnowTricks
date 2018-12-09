@@ -134,8 +134,17 @@ class Trick
         return $this->image;
     }
 
+    public function addImage(Image $image)
+    {
+        $this->images->add($image);
+        $image->setTrick($this);
+    }
+
+    /**
+     *
     public function setImage($image): void
     {
         $this->image = $image;
     }
+     */
 }

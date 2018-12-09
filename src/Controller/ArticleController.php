@@ -63,7 +63,11 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
+            /** @var Comment $comment */
             $comment = $form->getData();
+
+            $user = $this->getUser();
+            $comment->setUser($user);
 
             $manager->persist($comment);
             $manager->flush();
