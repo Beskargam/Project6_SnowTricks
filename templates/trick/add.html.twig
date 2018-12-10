@@ -24,3 +24,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/formCollections.js') }}"></script>
+{% endblock %}
