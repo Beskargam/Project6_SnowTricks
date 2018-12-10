@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -54,14 +56,15 @@ class Trick
     private $groupTrick;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", orphanRemoval=true)
      */
-    private $image;
+    private $images;
 
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,22 +132,42 @@ class Trick
         return $this;
     }
 
-    public function getImage()
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
     {
-        return $this->image;
+        return $this->images;
     }
 
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setTrick($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getTrick() === $this) {
+                $image->setTrick(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
     public function addImage(Image $image)
     {
         $this->images->add($image);
         $image->setTrick($this);
-    }
-
-    /**
-     *
-    public function setImage($image): void
-    {
-        $this->image = $image;
     }
      */
 }

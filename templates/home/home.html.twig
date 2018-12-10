@@ -16,12 +16,14 @@
                 </div>
             </div>
         </div>
+        {% if app.user.username is defined %}
         <div class="row">
             <div class="col-sm-12">
                 <a class="btn btn-primary"
                    href="{{ path('app_add') }}">Ajouter un Nouveau Trick</a>
             </div>
         </div>
+        {% endif %}
         <section>
             <div class="row d-flex">
                 {% for trick in trickList %}
