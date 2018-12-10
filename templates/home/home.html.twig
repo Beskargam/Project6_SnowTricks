@@ -17,42 +17,51 @@
             </div>
         </div>
         {% if app.user.username is defined %}
-        <div class="row">
-            <div class="col-sm-12">
-                <a class="btn btn-primary"
-                   href="{{ path('app_add') }}">Ajouter un Nouveau Trick</a>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a class="btn btn-primary"
+                       href="{{ path('app_add') }}">Ajouter un Nouveau Trick</a>
+                </div>
             </div>
-        </div>
         {% endif %}
         <section>
             <div class="row d-flex">
-                {% for trick in trickList %}
-                    <div class="col-sm-12 col-md-6 col-lg-3">
-                        <div class="card home-card">
-                            {% if trick.image.name is defined %}
-                                <img class="card-img-top card-img-zoom" src="{{ asset('uploads/images/')~trick.image.name }}"
-                                     alt="Card image cap">
-                            {% else %}
-                                <img class="card-img-top card-img-zoom" src="{{ asset('images/default_trickImage.jpg') }}"
-                                     alt="Card image cap">
-                            {% endif %}
-                            <div class="card-body">
-                                <a class="" href="{{ path('app_trick', {'id' : trick.id}) }}">{{ trick.title }}</a>
-                                {% if app.user.username is defined %}
-                                    <a class="float-right"
-                                       href="{{ path('app_delete', {'id' : trick.id}) }}"><span
-                                                class="oi oi-trash"></span></a>
-                                    <a class="action-icon float-right" href="{{ path('app_edit', {'id' : trick.id}) }}"><span
-                                                class="oi oi-pencil"></span></a>
+                {% if trick is defined %}
+                    {% for trick in trickList %}
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="card home-card">
+                                {% if trick.image.name is defined %}
+                                    <img class="card-img-top card-img-zoom"
+                                         src="{{ asset('uploads/images/')~trick.image.name }}"
+                                         alt="Card image cap">
+                                {% else %}
+                                    <img class="card-img-top card-img-zoom"
+                                         src="{{ asset('images/default_trickImage.jpg') }}"
+                                         alt="Card image cap">
                                 {% endif %}
+                                <div class="card-body">
+                                    <a class="" href="{{ path('app_trick', {'id' : trick.id}) }}">{{ trick.title }}</a>
+                                    {% if app.user.username is defined %}
+                                        <a class="float-right"
+                                           href="{{ path('app_delete', {'id' : trick.id}) }}"><span
+                                                    class="oi oi-trash"></span></a>
+                                        <a class="action-icon float-right"
+                                           href="{{ path('app_edit', {'id' : trick.id}) }}"><span
+                                                    class="oi oi-pencil"></span></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-sm-12 justify-content-center">
+                        <div class="card home-card">
+                            <div class="card-body">
+                                Aucun Trick publié pour le moment.
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    <p>
-                        Aucun Trick publié pour le moment.
-                    </p>
-                {% endfor %}
+                {% endif %}
             </div>
         </section>
     </div>
