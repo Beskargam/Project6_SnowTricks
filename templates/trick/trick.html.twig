@@ -74,18 +74,18 @@
         </div>
         <hr>
         <div class="row justify-content-center">
-            {% if comment is defined %}
+            {% if commentList is defined %}
                 {% for comment in commentList %}
                     <div class="col-sm-12">
                         <div class="card home-card">
                             <div class="card-header">
-                                {{ comment.user.username }}
+                                {{ comment.getUser.username}}
                             </div>
                             <div class="card-body">
-                                {{ comment.content }}
+                                {{ comment.commentContent }}
                             </div>
                             <div class="card-footer">
-                                {{ comment.publishedAt }}
+                                {{ comment.publishedAt|date('d/m/Y') }}
                             </div>
                         </div>
                     </div>
