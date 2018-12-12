@@ -76,3 +76,7 @@ footer {
     text-align: center;
     margin: 0.5rem;
 }
+
+.comment-content-box {
+    background-color: #cce5ff;
+}

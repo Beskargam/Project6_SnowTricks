@@ -76,6 +76,12 @@ class ArticleController extends AbstractController
                 'success',
                 'Votre message a bien été envoyé.'
             );
+            return $this->redirectToRoute('app_trick', [
+                'trick' => $trick,
+                'id' => $trick->getId(),
+                'form' => $form->createView(),
+                'commentList' => $commentList,
+            ]);
         }
 
         return $this->render('trick/trick.html.twig', [

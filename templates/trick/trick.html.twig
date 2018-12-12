@@ -84,11 +84,11 @@
                             <div class="card-header">
                                 {{ comment.getUser.username }}
                             </div>
-                            <div class="card-body">
+                            <div class="card-body comment-content-box">
                                 {{ comment.commentContent }}
                             </div>
                             <div class="card-footer">
-                                {{ comment.publishedAt|date('d/m/Y') }}
+                                {{ comment.publishedAt|date('d/m/Y h:i') }}
                             </div>
                         </div>
                     </div>
