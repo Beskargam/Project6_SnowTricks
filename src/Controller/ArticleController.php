@@ -95,15 +95,20 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() AND $form->isValid()) {
 
+
+
             $path = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
             $trick = $form->getData();
-            $image = $trick->addImage();
-            $file = $image->getFile();
+            $images = $trick->getImages();
 
-            $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
-            
-            $file->move($path, $name);
-            $image->setName($name);
+            foreach ($images as $image) {
+                $file = $image->getFile();
+                $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
+
+                $file->move($path, $name);
+                $image->setName($name);
+            }
+
 
             $manager->persist($trick);
             $manager->flush();
