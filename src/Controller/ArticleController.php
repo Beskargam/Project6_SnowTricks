@@ -101,8 +101,6 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() AND $form->isValid()) {
 
-
-
             $path = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
             $trick = $form->getData();
             $images = $trick->getImages();
@@ -114,7 +112,6 @@ class ArticleController extends AbstractController
                 $file->move($path, $name);
                 $image->setName($name);
             }
-
 
             $manager->persist($trick);
             $manager->flush();
@@ -160,15 +157,19 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
-            $path = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
+            $pathImage = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
+
             $trick = $form->getData();
-            $image = $trick->getImage();
-            $file = $image->getFile();
 
-            $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
+            // images uploads
+            $images = $trick->getImages();
+            foreach ($images as $image) {
+                $file = $image->getFile();
+                $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
 
-            $file->move($path, $name);
-            $image->setName($name);
+                $file->move($pathImage, $name);
+                $image->setName($name);
+            }
 
             $manager->persist($trick);
             $manager->flush();
