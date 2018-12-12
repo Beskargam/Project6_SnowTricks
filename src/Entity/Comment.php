@@ -34,6 +34,12 @@ class Comment
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $trick;
+
     public function __construct()
     {
         $this->publishedAt = new \DateTime();
@@ -74,6 +80,18 @@ class Comment
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTrick(): ?trick
+    {
+        return $this->trick;
+    }
+
+    public function setTrick(?trick $trick): self
+    {
+        $this->trick = $trick;
 
         return $this;
     }

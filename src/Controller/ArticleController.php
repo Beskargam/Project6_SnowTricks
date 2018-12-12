@@ -57,7 +57,9 @@ class ArticleController extends AbstractController
     {
         $commentList = $this->getDoctrine()
             ->getRepository(Comment::class)
-            ->findAll();
+            ->findBy([
+                'trick' => $trick,
+            ]);
 
         $form = $this->createForm(CommentType::class);
         $form->handleRequest($request);
@@ -68,6 +70,7 @@ class ArticleController extends AbstractController
 
             $user = $this->getUser();
             $comment->setUser($user);
+            //todo : ID de trick non trouvé lors de l'envoie d'un commentaire --> error trick_id = null
 
             $manager->persist($comment);
             $manager->flush();
@@ -105,12 +108,19 @@ class ArticleController extends AbstractController
             $trick = $form->getData();
             $images = $trick->getImages();
 
+            // images uploads
             foreach ($images as $image) {
                 $file = $image->getFile();
                 $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
 
                 $file->move($path, $name);
                 $image->setName($name);
+            }
+
+            // videos
+            $videos = $trick->getVideos();
+            foreach ($videos as $video) {
+                $video->getUrl();
             }
 
             $manager->persist($trick);
@@ -169,12 +179,6 @@ class ArticleController extends AbstractController
 
                 $file->move($pathImage, $name);
                 $image->setName($name);
-            }
-
-            // videos
-            $videos = $trick->getVideos();
-            foreach ($videos as $video) {
-                $video->getUrl();
             }
 
             $manager->persist($trick);
