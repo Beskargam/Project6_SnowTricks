@@ -13,9 +13,22 @@
         {{ form_widget(form.groupTrick) }}
     </div>
     <div class="field-space">
-        {{ form_label(form.images) }}
-        {{ form_widget(form.images) }}
-        <a href="#" id="add_image" class="btn btn-warning">Ajouter une image</a>
+        <div class="row">
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                {{ form_label(form.images) }}
+                {{ form_widget(form.images) }}
+                <a href="#" id="add_image" class="btn btn-warning">Ajouter une image</a>
+            </div>
+        </div>
+    </div>
+    <div class="field-space">
+        <div class="row">
+            <div class="col-sm-10 col-md-6 col-lg-4">
+                {{ form_label(form.videos) }}
+                {{ form_widget(form.videos) }}
+                <a href="#" id="add_video" class="btn btn-warning">Ajouter une video</a>
+            </div>
+        </div>
     </div>
     <div class="field-space">
         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}

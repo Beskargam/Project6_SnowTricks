@@ -26,17 +26,17 @@ class TrickType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Nom du Trick :',
+                'label' => 'Nom du Trick (requis) :',
                 'attr' => [
                     'placeholder' => false,
                 ]])
             ->add('content', TextareaType::class, [
-                'label' => 'Description du Trick :',
+                'label' => 'Description du Trick (requis) :',
                 'attr' => [
                     'placeholder' => false,
                 ]])
             ->add('groupTrick', EntityType::class, [
-                'label' => 'Catégorie du Trick :',
+                'label' => 'Catégorie du Trick (requis) :',
                 'class' => GroupTrick::class,
                 'choice_label' => 'name',
             ])
@@ -47,6 +47,14 @@ class TrickType extends AbstractType
                 'required' => false,
                 'by_reference' => false,
                 'label' => 'Ajout d\'images :',
+            ])
+            ->add('videos', CollectionType::class, [
+                'entry_type' => VideoType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'required' => false,
+                'by_reference' => false,
+                'label' => 'Ajout de vidéos :',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrement',

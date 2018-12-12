@@ -1,42 +1,89 @@
 $(document).ready(function () {
-    var $container = $('div#trick_images');
-    var index = $container.find(':input').length;
+
+    // Images collection
+    var $containerImage = $('div#trick_images');
+    var indexImage = $containerImage.find(':input').length;
 
     $('#add_image').click(function (e) {
-        addImage($container);
+        addImage($containerImage);
 
         e.preventDefault();
         return false;
     });
 
-    if (index === 0) {
-        addImage($container);
+    if (indexImage === 0) {
+        addImage($containerImage);
     } else {
-        $container.children('div').each(function () {
-            addDeleteLink($(this));
+        $containerImage.children('div').each(function () {
+            addDeleteImageLink($(this));
         });
     }
 
-    function addImage($container) {
-        var template = $container.attr('data-prototype')
+    function addImage($containerImage) {
+        var templateImage = $containerImage.attr('data-prototype')
             .replace(/__name__label__/g, '')
-            .replace(/__name__/g, index);
-        var $prototype = $(template);
+            .replace(/__name__/g, indexImage);
+        var $prototypeImage = $(templateImage);
 
-        addDeleteLink($prototype);
-        $container.append($prototype);
+        addDeleteImageLink($prototypeImage);
+        $containerImage.append($prototypeImage);
 
-        index++;
+        indexImage++;
     }
 
-    function addDeleteLink($prototype) {
-        var $deleteLink = $('<a href="#" class="btn btn-warning">Supprimer l\'image</a>');
+    function addDeleteImageLink($prototypeImage) {
+        var $deleteImageLink = $('<a href="#" class="btn btn-warning">Supprimer l\'image</a>');
 
-        $prototype.append($deleteLink);
+        $prototypeImage.append($deleteImageLink);
 
 
-        $deleteLink.click(function (e) {
-            $prototype.remove();
+        $deleteImageLink.click(function (e) {
+            $prototypeImage.remove();
+
+            e.preventDefault();
+            return false;
+        });
+    }
+
+    // Videos Collection
+    var $containerVideo = $('div#trick_videos');
+    var indexVideo = $containerVideo.find(':input').length;
+
+    $('#add_video').click(function (e) {
+        addVideo($containerVideo);
+
+        e.preventDefault();
+        return false;
+    });
+
+    if (indexVideo === 0) {
+        addVideo($containerVideo);
+    } else {
+        $containerVideo.children('div').each(function () {
+            addDeleteVideoLink($(this));
+        });
+    }
+
+    function addVideo($containerVideo) {
+        var templateVideo = $containerVideo.attr('data-prototype')
+            .replace(/__name__label__/g, '')
+            .replace(/__name__/g, indexVideo);
+        var $prototypeVideo = $(templateVideo);
+
+        addDeleteVideoLink($prototypeVideo);
+        $containerVideo.append($prototypeVideo);
+
+        indexVideo++;
+    }
+
+    function addDeleteVideoLink($prototypeVideo) {
+        var $deleteVideoLink = $('<a href="#" class="btn btn-warning">Supprimer l\'image</a>');
+
+        $prototypeVideo.append($deleteVideoLink);
+
+
+        $deleteVideoLink.click(function (e) {
+            $prototypeVideo.remove();
 
             e.preventDefault();
             return false;
