@@ -97,7 +97,7 @@ class ArticleController extends AbstractController
 
             $path = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
             $trick = $form->getData();
-            $image = $trick->getImage();
+            $image = $trick->addImage();
             $file = $image->getFile();
 
             $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
