@@ -171,6 +171,12 @@ class ArticleController extends AbstractController
                 $image->setName($name);
             }
 
+            // videos
+            $videos = $trick->getVideos();
+            foreach ($videos as $video) {
+                $video->getUrl();
+            }
+
             $manager->persist($trick);
             $manager->flush();
 
