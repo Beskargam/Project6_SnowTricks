@@ -6,109 +6,131 @@
 
 {% block body %}
     <div class="container body-box">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         <div class="row">
             <div class=" col-sm-12">
                 <h1 class="display-4 text-center trick-title">Modification du Trick : "{{ trick.title }}"</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card home-card">
-                    {% if trick.image.name is defined %}
-                        <img class="card-img-top" src="{{ asset('uploads/images/')~trick.image.name }}"
+        {% if trick.images is defined %}
+            {% for image in imageList %}
+                {% if loop.first %}
+                    <div class="row">
+                    <div class="col-sm-12">
+                    <div class="card home-card">
+                {#<img class="card-img-top"
+                     src="{{ asset('uploads/images/' ~ trick.image ) }}"
+                     alt="Card image cap">#}
+                {% else %}
+                    <div class="row d-flex">
+                    <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
+                    <div class="card home-card">
+                {#<img class="card-img-top card-img-zoom"
+                     src="{{ asset('uploads/images/' ~ trick.image ) }}"
+                     alt="Card image cap">#}
+                {% endif %}
+                <div class="card-footer">
+                    {{ form_widget(form.images) }}
+                    <a class="float-right" href="#">
+                        <span class="oi oi-trash"></span>
+                    </a>
+                </div>
+                </div>
+                </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card home-card">
+                        <img class="card-img-top card-img-zoom"
+                             src="{{ asset('images/default_trickImage.jpg') }}"
                              alt="Card image cap">
-                    {% else %}
-                        <img class="card-img-top" src="{{ asset('images/default_trickImage.jpg') }}"
-                             alt="Card image cap">
-                    {% endif %}
-                    <div class="card-footer">
-                        <!-- Button Modal -->
-                        <button type="button" class="btn float-right" data-toggle="modal" data-target="#myModal">
-                            <span class="oi oi-trash"></span>
-                        </button>
+                        <div class="card-footer">
+                            {{ form_widget(form.images) }}
+                            <a class="float-right" href="#">
+                                <span class="oi oi-trash"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
-                        <!-- The Modal -->
-                        <div class="modal" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        Modal body..
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
-
-                                </div>
+        <div class="row d-flex">
+            {% if trick.videos is defined %}
+                {% for video in videoList %}
+                    <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
+                        <div class="card home-card">
+                            <embed class="card-img-top card-img-zoom"
+                                   src="https://www.youtube.com/embed/{{ video.url }}"
+                                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                   allowfullscreen>
+                            <div class="card-footer">
+                                {{ form_widget(form.videos) }}
+                                <a class="float-right" href="#">
+                                    <span class="oi oi-trash"></span>
+                                </a>
                             </div>
                         </div>
-
-                        <button type="button" class="btn action-icon float-right" href="#">
-                            <span class="oi oi-pencil"></span>
-                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box-form">
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <div class="field-space">
+                        {{ form_label(form.title) }}
+                        {{ form_widget(form.title) }}
+                    </div>
+                    <div class="field-space">
+                        {{ form_label(form.content) }}
+                        {{ form_widget(form.content) }}
+                    </div>
+                    <div class="field-space">
+                        {{ form_label(form.groupTrick) }}
+                        {{ form_widget(form.groupTrick) }}
+                    </div>
+                    <div class="field-space">
+                        <div class="row">
+                            <div class="col-sm-10 col-md-6 col-lg-4">
+                                {{ form_widget(form.images) }}
+                                <a href="#" id="add_image" class="btn btn-warning">Ajouter une image</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-space">
+                        <div class="row">
+                            <div class="col-sm-10 col-md-6 col-lg-4">
+                                {{ form_widget(form.videos) }}
+                                <a href="#" id="add_video" class="btn btn-warning">Ajouter une video</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-space">
+                        <a class="btn btn-danger float-right"
+                           href="{{ path('app_delete', {'id' : trick.id}) }}">Supprimer</a>
+                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary float-right action-button-space'}}) }}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row d-flex">
-            {% if trick.images is defined %}
-                {% for image in trick.images %}
-                    <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
-                        <div class="card home-card">
-                            <img class="card-img-top card-img-zoom"
-                                 src="{{ asset('uploads/images/') }}"
-                                 alt="Card image cap">
-                            <div class="card-footer">
-                                <a class="float-right" href="#">
-                                    <span class="oi oi-trash"></span>
-                                </a>
-                                <a class="action-icon float-right" href="#">
-                                    <span class="oi oi-pencil"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
+        <div class="field-space">
+            {{ form_rest(form) }}
         </div>
-        <div class="row d-flex">
-            {% if trick.videos is defined %}
-                {% for video in trick.videos %}
-                    <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
-                        <div class="card home-card">
-                            <embed class="card-img-top card-img-zoom" src="https://www.youtube.com/embed/hih9jIzOoRg"
-                                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                   allowfullscreen>
-                            <div class="card-footer">
-                                <a class="float-right" href="#">
-                                    <span class="oi oi-trash"></span>
-                                </a>
-                                <a class="action-icon float-right" href="#">
-                                    <span class="oi oi-pencil"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <p class="trick-content">
-                    {{ include('trick/form.html.twig') }}
-                </p>
-            </div>
-        </div>
-        <a class="btn btn-danger"
-           href="{{ path('app_delete', {'id' : trick.id}) }}">Supprimer</a>
+        {{ form_end(form) }}
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/formTrickEdit') }}"></script>
 {% endblock %}

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 
 use App\Entity\Comment;
+use App\Entity\Image;
 use App\Entity\Trick;
+use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
@@ -60,6 +62,16 @@ class ArticleController extends AbstractController
             ->findBy([
                 'trick' => $trick,
             ]);
+        $imageList = $this->getDoctrine()
+            ->getRepository(Image::class)
+            ->findBy([
+                'trick' => $trick
+            ]);
+        $videoList = $this->getDoctrine()
+            ->getRepository(Video::class)
+            ->findBy([
+                'trick' => $trick
+            ]);
 
         $form = $this->createForm(CommentType::class);
         $form->handleRequest($request);
@@ -84,6 +96,8 @@ class ArticleController extends AbstractController
                 'id' => $trick->getId(),
                 'form' => $form->createView(),
                 'commentList' => $commentList,
+                'imageList' => $imageList,
+                'videoList' => $videoList,
             ]);
         }
 
@@ -91,6 +105,8 @@ class ArticleController extends AbstractController
             'form' => $form->createView(),
             'trick' => $trick,
             'commentList' => $commentList,
+            'imageList' => $imageList,
+            'videoList' => $videoList,
         ]);
     }
 
@@ -104,14 +120,14 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() AND $form->isValid()) {
 
-            $path = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
+            $path = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
             $trick = $form->getData();
-            $images = $trick->getImages();
 
             // images uploads
+            $images = $trick->getImages();
             foreach ($images as $image) {
                 $file = $image->getFile();
-                $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
+                $name = $this->generateUniqueFileName() . '.' . $file->guessExtension();
 
                 $file->move($path, $name);
                 $image->setName($name);
@@ -120,7 +136,11 @@ class ArticleController extends AbstractController
             // videos
             $videos = $trick->getVideos();
             foreach ($videos as $video) {
-                $video->getUrl();
+                $originalUrl = $video->getUrl();
+                $discardUrl = 'http://www.youtube.com/watch?v=';
+                $transformedUrl = str_replace($discardUrl, "", $originalUrl);
+                $video->setUrl($transformedUrl);
+
             }
 
             $manager->persist($trick);
@@ -162,23 +182,38 @@ class ArticleController extends AbstractController
      */
     public function edit(EntityManagerInterface $manager, Request $request, Trick $trick)
     {
+        $imageList = $this->getDoctrine()
+            ->getRepository(Image::class)
+            ->findBy([
+                'trick' => $trick
+            ]);
+        $videoList = $this->getDoctrine()
+            ->getRepository(Video::class)
+            ->findBy([
+                'trick' => $trick
+            ]);
+
         $form = $this->createForm(TrickType::class, $trick);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() AND $form->isValid()) {
-            $pathImage = $this->getParameter('kernel.project_dir') .'/public/uploads/images';
-
+            $pathImage = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
             $trick = $form->getData();
 
             // images uploads
             $images = $trick->getImages();
             foreach ($images as $image) {
                 $file = $image->getFile();
-                $name = $this->generateUniqueFileName(). '.' .$file->guessExtension();
+                $name = $this->generateUniqueFileName() . '.' . $file->guessExtension();
 
                 $file->move($pathImage, $name);
                 $image->setName($name);
+            }
+
+            // videos
+            $videos = $trick->getVideos();
+            foreach ($videos as $video) {
+                $video->getUrl();
             }
 
             $manager->persist($trick);
@@ -186,20 +221,29 @@ class ArticleController extends AbstractController
 
             $this->addFlash('success', 'Le Trick a bien été modifié.');
 
+            // redirect rendering
             $commentList = $this->getDoctrine()
                 ->getRepository(Comment::class)
-                ->findAll();
+                ->findBy([
+                    'trick' => $trick,
+                ]);
+            $form = $this->createForm(CommentType::class);
 
-            return $this->render('trick/trick.html.twig', [
-                'id' => $trick->getId(),
+            return $this->redirectToRoute('app_trick', [
                 'trick' => $trick,
+                'id' => $trick->getId(),
+                'form' => $form->createView(),
                 'commentList' => $commentList,
+                'imageList' => $imageList,
+                'videoList' => $videoList,
             ]);
         }
 
         return $this->render('trick/edit.html.twig', [
             'form' => $form->createView(),
             'trick' => $trick,
+            'imageList' => $imageList,
+            'videoList' => $videoList,
         ]);
     }
 

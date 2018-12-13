@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // Images collection
+    // Images
     var $containerImage = $('div#trick_images');
     var indexImage = $containerImage.find(':input').length;
 
@@ -45,7 +45,7 @@ $(document).ready(function () {
         });
     }
 
-    // Videos Collection
+    // Videos
     var $containerVideo = $('div#trick_videos');
     var indexVideo = $containerVideo.find(':input').length;
 
