@@ -15,9 +15,9 @@
                      alt="Card image cap">
             {% endif %}
         </div>
+    <div class="row d-flex">
         {% if trick.images is defined %}
             {% for image in trick.images %}
-                <div class="row d-flex">
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
                             <img class="card-img-top card-img-zoom"
@@ -25,22 +25,22 @@
                                  alt="Card image cap">
                         </div>
                     </div>
-                </div>
             {% endfor %}
         {% endif %}
+    </div>
+    <div class="row d-flex">
         {% if trick.videos is defined %}
             {% for video in trick.videos %}
-                <div class="row d-flex">
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            <embed src="https://www.youtube.com/embed/hih9jIzOoRg" frameborder="0"
+                            <embed class="card-img-top card-img-zoom" src="https://www.youtube.com/embed/hih9jIzOoRg" frameborder="0"
                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                    allowfullscreen>
                         </div>
                     </div>
-                </div>
             {% endfor %}
         {% endif %}
+    </div>
         <div class="row">
             <div class="trick-title-box col-sm-12">
                 <h1 class="display-4 text-center trick-title">{{ trick.title }}</h1>
