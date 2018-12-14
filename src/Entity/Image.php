@@ -31,7 +31,7 @@ class Image
     private $trick;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="boolean")
      */
     private $main;
 

@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,10 +18,9 @@ class ImageType extends AbstractType
                 'label' => false,
                 'required' => false,
             ])
-            ->add('main', IntegerType::class, [
+            /*->add('main', RadioType::class, [
                 'label' => 'Image principale',
-                'required' => true,
-                ])
+                ])*/
         ;
     }
 

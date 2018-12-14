@@ -137,7 +137,7 @@ class ArticleController extends AbstractController
             $videos = $trick->getVideos();
             foreach ($videos as $video) {
                 $originalUrl = $video->getUrl();
-                $discardUrl = 'http://www.youtube.com/watch?v=';
+                $discardUrl = 'https://www.youtube.com/watch?v=';
                 $transformedUrl = str_replace($discardUrl, "", $originalUrl);
                 $video->setUrl($transformedUrl);
 
@@ -154,13 +154,27 @@ class ArticleController extends AbstractController
             $form = $this->createForm(CommentType::class);
             $commentList = $this->getDoctrine()
                 ->getRepository(Comment::class)
-                ->findAll();
+                ->findBy([
+                    'trick' => $trick,
+                ]);
+            $imageList = $this->getDoctrine()
+                ->getRepository(Image::class)
+                ->findBy([
+                    'trick' => $trick
+                ]);
+            $videoList = $this->getDoctrine()
+                ->getRepository(Video::class)
+                ->findBy([
+                    'trick' => $trick
+                ]);
 
-            return $this->render('trick/trick.html.twig', [
+            return $this->redirectToRoute('trick/trick.html.twig', [
                 'id' => $trick->getId(),
                 'trick' => $trick,
                 'form' => $form->createView(),
                 'commentList' => $commentList,
+                'imageList' => $imageList,
+                'videoList' => $videoList,
             ]);
         }
 
@@ -212,10 +226,10 @@ class ArticleController extends AbstractController
             }
 
             // videos
-            $videos = $trick->getVideos();
+            $videos = $trick->getVideos(); // TODO : Attempted to call an undefined method named "getVideos" of class "Doctrine\ORM\PersistentCollection"
             foreach ($videos as $video) {
                 $originalUrl = $video->getUrl();
-                $discardUrl = 'http://www.youtube.com/watch?v=';
+                $discardUrl = 'https://www.youtube.com/watch?v=';
                 $transformedUrl = str_replace($discardUrl, "", $originalUrl);
                 $video->setUrl($transformedUrl);
             }

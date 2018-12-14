@@ -6,32 +6,20 @@
 
 {% block body %}
     <div class="container body-box">
-    <div class="row">
-        <div class=" col-sm-12">
-            <h1 class="display-4 text-center trick-title">Modification du Trick : "{{ trick.title }}"</h1>
-        </div>
-    </div>
-    {% if trick.images is defined %}
-    {% for image in imageList %}
-    {% if loop.first %}
-    <div class="row">
-    <div class="col-sm-12">
-    <div class="card home-card">
-    {#<img class="card-img-top"
-         src="{{ asset('uploads/images/' ~ trick.image ) }}"
-         alt="Card image cap">#}
-    {% else %}
-    <div class="row d-flex">
-        <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
-            <div class="card home-card">
-                {#<img class="card-img-top"
-                     src="{{ asset('uploads/images/' ~ trick.image ) }}"
-                     alt="Card image cap">#}
-                {% endif %}
+        <div class="row">
+            <div class=" col-sm-12">
+                <h1 class="display-4 text-center trick-title">Modification du Trick : "{{ trick.title }}"</h1>
+            </div>
+        </div>{% if trick.images is defined %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card home-card">
+                    <img class="card-img-top card-img-display"
+                         src="{#{{ asset('uploads/images/' ~ trick.images, {'main' : 1}) }}#}"
+                         alt="Image Principale">
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
     {% else %}
         <div class="row">
             <div class="col-sm-12">
@@ -42,10 +30,23 @@
                 </div>
             </div>
         </div>
-    {% endif %}
-    <div class="row d-flex">
-        {% if trick.videos is defined %}
-            {% for video in trick.videos %}
+        {% endif %}
+        {% if trick.images is defined %}
+            <div class="row d-flex">
+                {% for image in imageList %}
+                    <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
+                        <div class="card home-card">
+                            <img class="card-img-top card-img-display"
+                                 src="{{ asset('uploads/images/' ~ image.name ) }}"
+                                 alt="{{ image.name }}">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="row d-flex">
+            {% if trick.videos is defined %}
+                {% for video in trick.videos %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
                             <embed class="card-img-top" src="https://www.youtube.com/embed/{{ video.url }}"
@@ -53,9 +54,9 @@
                                    allowfullscreen>
                         </div>
                     </div>
-            {% endfor %}
-        {% endif %}
-    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
         <div class="row">
             <div class="trick-title-box col-sm-12">
                 <h1 class="display-4 text-center trick-title">{{ trick.title }}</h1>

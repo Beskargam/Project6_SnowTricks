@@ -77,7 +77,7 @@ $(document).ready(function () {
     }
 
     function addDeleteVideoLink($prototypeVideo) {
-        var $deleteVideoLink = $('<a href="#" class="btn btn-warning">Supprimer l\'image</a>');
+        var $deleteVideoLink = $('<a href="#" class="btn btn-warning">Supprimer la vidéo</a>');
 
         $prototypeVideo.append($deleteVideoLink);
 

@@ -18,17 +18,17 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card home-card">
-                        {#<img class="card-img-top card-img-display"
-                             src="{{ asset('uploads/images/' ~ trick.images) }}"
-                             alt="Card image cap">#}
+                        <img class="card-img-top card-img-display"
+                             src="{#{{ asset('uploads/images/' ~ trick.images, {'main' : 1}) }}#}"
+                             alt="Image Principale">
                         <div class="card-footer">
-                            <div class="field-img-edit">
-                                {{ form_widget(form.images) }}
+                            <div class="field-mainImg-edit">
+                                {# Form here #}
                             </div>
-                            <button class="btn btn-img-delete float-right">
+                            <button class="btn btn-mainImg-delete float-right">
                                 <span class="oi oi-trash"></span>
                             </button>
-                            <button class="btn btn-img-edit action-button-space float-right">
+                            <button class="btn btn-mainImg-edit action-button-space float-right">
                                 <span class="oi oi-pencil"></span>
                             </button>
                         </div>
@@ -42,32 +42,21 @@
                         <img class="card-img-top"
                              src="{{ asset('images/default_trickImage.jpg') }}"
                              alt="Card image cap">
-                        <div class="card-footer">
-                            <div class="field-img-edit">
-                                {{ form_widget(form.images) }}
-                            </div>
-                            <button class="btn btn-img-delete float-right">
-                                <span class="oi oi-trash"></span>
-                            </button>
-                            <button class="btn btn-img-edit action-button-space float-right">
-                                <span class="oi oi-pencil"></span>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
         {% endif %}
         {% if trick.images is defined %}
-                <div class="row d-flex">
-            {% for image in imageList %}
+            <div class="row d-flex">
+                {% for image in imageList %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            {#<img class="card-img-top card-img-display"
-                                 src="{{ asset('uploads/images/' ~ trick.images ) }}"
-                                 alt="Card image cap">#}
+                            <img class="card-img-top card-img-display"
+                                 src="{{ asset('uploads/images/' ~ image.name ) }}"
+                                 alt="{{ image.name }}">
                             <div class="card-footer">
                                 <div class="field-img-edit">
-                                    {{ form_widget(form.images) }}
+                                    {# Form here #}
                                 </div>
                                 <button class="btn btn-img-delete float-right">
                                     <span class="oi oi-trash"></span>
@@ -78,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-            {% endfor %}
+                {% endfor %}
             </div>
         {% endif %}
 
@@ -93,7 +82,7 @@
                                    allowfullscreen>
                             <div class="card-footer">
                                 <div class="field-video-edit">
-                                    {{ form_widget(form.videos) }}
+                                    {# Form here #}
                                 </div>
                                 <button class="btn btn-video-delete float-right">
                                     <span class="oi oi-trash"></span>
