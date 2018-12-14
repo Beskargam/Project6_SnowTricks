@@ -233,9 +233,9 @@ class ArticleController extends AbstractController
             $form = $this->createForm(CommentType::class);
 
             return $this->redirectToRoute('app_trick', [
+                'form' => $form->createView(),
                 'trick' => $trick,
                 'id' => $trick->getId(),
-                'form' => $form->createView(),
                 'commentList' => $commentList,
                 'imageList' => $imageList,
                 'videoList' => $videoList,
