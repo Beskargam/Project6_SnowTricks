@@ -194,11 +194,12 @@ class ArticleController extends AbstractController
             ]);
 
         $form = $this->createForm(TrickType::class, $trick);
+        $form->getData();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() AND $form->isValid()) {
             $pathImage = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
-            $trick = $form->getData();
+            $trick =
 
             // images uploads
             $images = $trick->getImages();

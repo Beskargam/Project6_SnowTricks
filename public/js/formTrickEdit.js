@@ -8,6 +8,14 @@ $(document).ready(function () {
         return false
     });
 
+    // Image Delete
+    $('.btn-img-delete').click(function (e) {
+        $('.card-img-display').css({opacity : 0.5});
+
+        e.preventDefault();
+        return false
+    });
+
     // Field Video Edit
     $('.field-video-edit').hide();
     $('.btn-video-edit').click(function (e) {
@@ -15,7 +23,7 @@ $(document).ready(function () {
 
         e.preventDefault();
         return false
-    })
+    });
 
     // Video Delete
     $('.btn-video-delete').click(function (e) {
@@ -23,5 +31,5 @@ $(document).ready(function () {
 
         e.preventDefault();
         return false
-    })
+    });
 });

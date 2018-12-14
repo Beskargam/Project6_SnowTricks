@@ -10,60 +10,75 @@
         <div class="row">
             <div class=" col-sm-12">
                 <h1 class="display-4 text-center trick-title">
-                Modification du Trick : "{{ trick.title }}"
+                    Modification du Trick : "{{ trick.title }}"
                 </h1>
             </div>
         </div>
         {% if trick.images is defined %}
-            {% for image in imageList %}
-                {% if loop.first %}
-                    <div class="row">
-                    <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
                     <div class="card home-card">
-                <img class="card-img-top card-img-display"
-                     src="{{ asset('images/default_trickImage.jpg') }}"
-                     alt="Card image cap">
-                {% else %}
-                    <div class="row d-flex">
-                    <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
-                    <div class="card home-card">
-                {#<img class="card-img-top card-img-display card-img-zoom"
-                     src="{{ asset('uploads/images/' ~ trick.image ) }}"
-                     alt="Card image cap">#}
-                {% endif %}
-                <div class="card-footer">
-                    <div class="field-img-edit">
-                        {{ form_widget(form.images) }}
+                        {#<img class="card-img-top card-img-display"
+                             src="{{ asset('uploads/images/' ~ trick.images) }}"
+                             alt="Card image cap">#}
+                        <div class="card-footer">
+                            <div class="field-img-edit">
+                                {{ form_widget(form.images) }}
+                            </div>
+                            <button class="btn btn-img-delete float-right">
+                                <span class="oi oi-trash"></span>
+                            </button>
+                            <button class="btn btn-img-edit action-button-space float-right">
+                                <span class="oi oi-pencil"></span>
+                            </button>
+                        </div>
                     </div>
-                    <button class="btn btn-img-delete float-right">
-                        <span class="oi oi-trash"></span>
-                    </button>
-                    <button class="btn btn-img-edit action-button-space float-right">
-                        <span class="oi oi-pencil"></span>
-                    </button>
                 </div>
-                </div>
-                </div>
-                </div>
-            {% endfor %}
+            </div>
         {% else %}
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card home-card">
-                        <img class="card-img-top card-img-zoom"
+                        <img class="card-img-top"
                              src="{{ asset('images/default_trickImage.jpg') }}"
                              alt="Card image cap">
                         <div class="card-footer">
-                            {{ form_widget(form.images) }}
-                    <button class="btn float-right">
-                        <span class="oi oi-trash"></span>
-                    </button>
-                    <button class="btn action-button-space float-right">
-                        <span class="oi oi-pencil"></span>
-                    </button>
+                            <div class="field-img-edit">
+                                {{ form_widget(form.images) }}
+                            </div>
+                            <button class="btn btn-img-delete float-right">
+                                <span class="oi oi-trash"></span>
+                            </button>
+                            <button class="btn btn-img-edit action-button-space float-right">
+                                <span class="oi oi-pencil"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        {% endif %}
+        {% if trick.images is defined %}
+                <div class="row d-flex">
+            {% for image in imageList %}
+                    <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
+                        <div class="card home-card">
+                            {#<img class="card-img-top card-img-display"
+                                 src="{{ asset('uploads/images/' ~ trick.images ) }}"
+                                 alt="Card image cap">#}
+                            <div class="card-footer">
+                                <div class="field-img-edit">
+                                    {{ form_widget(form.images) }}
+                                </div>
+                                <button class="btn btn-img-delete float-right">
+                                    <span class="oi oi-trash"></span>
+                                </button>
+                                <button class="btn btn-img-edit action-button-space float-right">
+                                    <span class="oi oi-pencil"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
             </div>
         {% endif %}
 
@@ -72,7 +87,7 @@
                 {% for video in videoList %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            <embed class="card-img-top card-video-display card-img-zoom"
+                            <embed class="card-img-top card-video-display"
                                    src="https://www.youtube.com/embed/{{ video.url }}"
                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                    allowfullscreen>

@@ -30,6 +30,11 @@ class Image
      */
     private $trick;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $main;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,6 +70,18 @@ class Image
     public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;
+
+        return $this;
+    }
+
+    public function getMain(): ?int
+    {
+        return $this->main;
+    }
+
+    public function setMain(int $main): self
+    {
+        $this->main = $main;
 
         return $this;
     }
