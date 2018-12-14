@@ -213,7 +213,10 @@ class ArticleController extends AbstractController
             // videos
             $videos = $trick->getVideos();
             foreach ($videos as $video) {
-                $video->getUrl();
+                $originalUrl = $video->getUrl();
+                $discardUrl = 'http://www.youtube.com/watch?v=';
+                $transformedUrl = str_replace($discardUrl, "", $originalUrl);
+                $video->setUrl($transformedUrl);
             }
 
             $manager->persist($trick);
