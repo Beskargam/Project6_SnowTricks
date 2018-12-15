@@ -30,14 +30,14 @@ class ArticleController extends AbstractController
     public function homepage(TrickRepository $trickRepository,
                              ImageRepository $imageRepository)
     {
-        $tricksList = $trickRepository
+        $trickList = $trickRepository
             ->findAll();
-        $imageList = $imageRepository
-            ->findAll();
+        $mainImageList = $imageRepository
+            ->findByMain(1);
 
         return $this->render('home/home.html.twig', [
-            'trickList' => $tricksList,
-            'imageList' => $imageList,
+            'trickList' => $trickList,
+            'mainImageList' => $mainImageList,
         ]);
     }
 
@@ -46,15 +46,15 @@ class ArticleController extends AbstractController
      */
     public function trickList(TrickRepository $trickRepository)
     {
-        $tricksList = $trickRepository
+        $trickList = $trickRepository
             ->findAll();
 
-        if (!$tricksList) {
+        if (!$trickList) {
             throw $this->createNotFoundException('Aucun Trick trouvé !');
         }
 
         return $this->render('trick/tricksList.html.twig', [
-            'trickList' => $tricksList
+            'trickList' => $trickList
         ]);
     }
 

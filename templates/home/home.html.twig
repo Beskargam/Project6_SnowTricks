@@ -35,13 +35,9 @@
 
 
                                 {% if trick.images is defined %}
-
-                                    {% for image in imageList if image.main == 1 %}
                                         <img class="card-img-top card-img-zoom"
-                                             src="{{ asset('uploads/images/', {'id' : trick.images.id}) ~ image.name }}"
+                                             src="{{ asset('uploads/images/'~ images.name, {'id' : trick.id}) }}"
                                              alt="Card image cap">
-                                    {% endfor %}
-
                                 {% else %}
                                     <img class="card-img-top card-img-zoom"
                                          src="{{ asset('images/default_trickImage.jpg') }}"
