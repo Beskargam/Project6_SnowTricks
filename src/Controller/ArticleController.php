@@ -9,7 +9,10 @@ use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\CommentType;
 use App\Form\TrickType;
+use App\Repository\CommentRepository;
+use App\Repository\ImageRepository;
 use App\Repository\TrickRepository;
+use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,14 +27,17 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function homepage()
+    public function homepage(TrickRepository $trickRepository,
+                             ImageRepository $imageRepository)
     {
-        $tricksList = $this->getDoctrine()
-            ->getRepository(Trick::class)
+        $tricksList = $trickRepository
+            ->findAll();
+        $imageList = $imageRepository
             ->findAll();
 
         return $this->render('home/home.html.twig', [
-            'trickList' => $tricksList
+            'trickList' => $tricksList,
+            'imageList' => $imageList,
         ]);
     }
 
@@ -55,20 +61,23 @@ class ArticleController extends AbstractController
     /**
      * @Route("/figure/{id<\d+>}", name="trick")
      */
-    public function trickView(EntityManagerInterface $manager, Request $request, Trick $trick)
+    public function trickView(CommentRepository $commentRepository,
+                              ImageRepository $imageRepository,
+                              VideoRepository $videoRepository,
+                              EntityManagerInterface $manager,
+                              Request $request,
+                              Trick $trick)
+
     {
-        $commentList = $this->getDoctrine()
-            ->getRepository(Comment::class)
+        $commentList = $commentRepository
             ->findBy([
                 'trick' => $trick,
             ]);
-        $imageList = $this->getDoctrine()
-            ->getRepository(Image::class)
+        $imageList = $imageRepository
             ->findBy([
                 'trick' => $trick
             ]);
-        $videoList = $this->getDoctrine()
-            ->getRepository(Video::class)
+        $videoList = $videoRepository
             ->findBy([
                 'trick' => $trick
             ]);
@@ -113,7 +122,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/ajouter", name="add")
      */
-    public function add(EntityManagerInterface $manager, Request $request)
+    public function add(CommentRepository $commentRepository,
+                        ImageRepository $imageRepository,
+                        VideoRepository $videoRepository,
+                        EntityManagerInterface $manager,
+                        Request $request)
     {
         $form = $this->createForm(TrickType::class);
         $form->handleRequest($request);
@@ -152,18 +165,15 @@ class ArticleController extends AbstractController
             );
 
             $form = $this->createForm(CommentType::class);
-            $commentList = $this->getDoctrine()
-                ->getRepository(Comment::class)
+            $commentList = $commentRepository
                 ->findBy([
                     'trick' => $trick,
                 ]);
-            $imageList = $this->getDoctrine()
-                ->getRepository(Image::class)
+            $imageList = $imageRepository
                 ->findBy([
                     'trick' => $trick
                 ]);
-            $videoList = $this->getDoctrine()
-                ->getRepository(Video::class)
+            $videoList = $videoRepository
                 ->findBy([
                     'trick' => $trick
                 ]);
@@ -194,15 +204,18 @@ class ArticleController extends AbstractController
     /**
      * @Route("/modifier/{id<\d+>}", name="edit")
      */
-    public function edit(EntityManagerInterface $manager, Request $request, Trick $trick)
+    public function edit(CommentRepository $commentRepository,
+                         ImageRepository $imageRepository,
+                         VideoRepository $videoRepository,
+                         EntityManagerInterface $manager,
+                         Request $request,
+                         Trick $trick)
     {
-        $imageList = $this->getDoctrine()
-            ->getRepository(Image::class)
+        $imageList = $imageRepository
             ->findBy([
                 'trick' => $trick
             ]);
-        $videoList = $this->getDoctrine()
-            ->getRepository(Video::class)
+        $videoList = $videoRepository
             ->findBy([
                 'trick' => $trick
             ]);
@@ -215,7 +228,7 @@ class ArticleController extends AbstractController
             $pathImage = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
             $trick =
 
-            // images uploads
+                // images uploads
             $images = $trick->getImages();
             foreach ($images as $image) {
                 $file = $image->getFile();
@@ -240,12 +253,11 @@ class ArticleController extends AbstractController
             $this->addFlash('success', 'Le Trick a bien été modifié.');
 
             // redirect rendering
-            $commentList = $this->getDoctrine()
-                ->getRepository(Comment::class)
+            $form = $this->createForm(CommentType::class);
+            $commentList = $commentRepository
                 ->findBy([
                     'trick' => $trick,
                 ]);
-            $form = $this->createForm(CommentType::class);
 
             return $this->redirectToRoute('app_trick', [
                 'form' => $form->createView(),
@@ -268,15 +280,15 @@ class ArticleController extends AbstractController
     /**
      * @Route("/supprimer/{id<\d+>}", name="delete")
      */
-    public function delete(Request $request, Trick $trick)
+    public function delete(Request $request,
+                           EntityManagerInterface $manager,
+                           Trick $trick)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-
         $form = $this->get('form.factory')->create();
 
         if ($request->isMethod('POST') AND $form->handleRequest($request)->isValid()) {
-            $entityManager->remove($trick);
-            $entityManager->flush();
+            $manager->remove($trick);
+            $manager->flush();
 
             $this->addFlash('notice', 'Le Trick a bien été supprimé.');
 

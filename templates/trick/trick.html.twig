@@ -11,15 +11,17 @@
                 <h1 class="display-4 text-center trick-title">Modification du Trick : "{{ trick.title }}"</h1>
             </div>
         </div>{% if trick.images is defined %}
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card home-card">
-                    <img class="card-img-top card-img-display"
-                         src="{#{{ asset('uploads/images/' ~ trick.images, {'main' : 1}) }}#}"
-                         alt="Image Principale">
+        {% for image in imageList if image.main == 1 %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card home-card">
+                            <img class="card-img-top card-img-display"
+                                 src="{{ asset('uploads/images/' ~ image.name ) }}"
+                                 alt="Image Principale">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+        {% endfor %}
     {% else %}
         <div class="row">
             <div class="col-sm-12">
