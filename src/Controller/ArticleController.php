@@ -82,7 +82,7 @@ class ArticleController extends AbstractController
 
             $user = $this->getUser();
             $comment->setUser($user);
-            //todo : ID de trick non trouvé lors de l'envoie d'un commentaire --> error trick_id = null
+            $comment->setTrick($trick)->getId();
 
             $manager->persist($comment);
             $manager->flush();
@@ -168,7 +168,7 @@ class ArticleController extends AbstractController
                     'trick' => $trick
                 ]);
 
-            return $this->redirectToRoute('trick/trick.html.twig', [
+            return $this->redirectToRoute('app_trick', [
                 'id' => $trick->getId(),
                 'trick' => $trick,
                 'form' => $form->createView(),

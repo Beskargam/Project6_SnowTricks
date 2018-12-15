@@ -18,9 +18,9 @@ class ImageType extends AbstractType
                 'label' => false,
                 'required' => false,
             ])
-            /*->add('main', RadioType::class, [
+            ->add('main', RadioType::class, [
                 'label' => 'Image principale',
-                ])*/
+                ])
         ;
     }
 
