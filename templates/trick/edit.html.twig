@@ -48,15 +48,17 @@
         {% endif %}
         {% if trick.images is defined %}
             <div class="row d-flex">
-                {% for image in imageList %}
+                {% for image in form.images %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
+                            {{ dump(image.vars.data.name) }}
                             <img class="card-img-top card-img-display"
-                                 src="{{ asset('uploads/images/' ~ image.name ) }}"
-                                 alt="{{ image.name }}">
+                                 src="{{ asset('uploads/images/' ~ image.vars.data.name ) }}"
+                                 alt="">
                             <div class="card-footer">
                                 <div class="field-img-edit">
                                     {# Form here #}
+                                    {{ form_widget(image) }}
                                 </div>
                                 <button class="btn btn-img-delete float-right">
                                     <span class="oi oi-trash"></span>

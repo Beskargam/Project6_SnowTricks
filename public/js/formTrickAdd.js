@@ -6,10 +6,23 @@ $(document).ready(function () {
 
     $('#add_image').click(function (e) {
         addImage($containerImage);
+        mainButton();
 
         e.preventDefault();
         return false;
     });
+
+    mainButton();
+    
+    function mainButton() {
+        $('.mainButton').click(function(){
+            $('.mainButton').each(function (index) {
+                console.log(index);
+                $(this).attr('checked', true);
+            });
+            $(this).attr('checked', true);
+        });
+    }
 
     if (indexImage === 0) {
         addImage($containerImage);
@@ -18,7 +31,7 @@ $(document).ready(function () {
             addDeleteImageLink($(this));
         });
     }
-
+        
     function addImage($containerImage) {
         var templateImage = $containerImage.attr('data-prototype')
             .replace(/__name__label__/g, '')

@@ -61,27 +61,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/figure/{id<\d+>}", name="trick")
      */
-    public function trickView(CommentRepository $commentRepository,
-                              ImageRepository $imageRepository,
-                              VideoRepository $videoRepository,
-                              EntityManagerInterface $manager,
+    public function trickView(EntityManagerInterface $manager,
                               Request $request,
                               Trick $trick)
 
     {
-        $commentList = $commentRepository
-            ->findBy([
-                'trick' => $trick,
-            ]);
-        $imageList = $imageRepository
-            ->findBy([
-                'trick' => $trick
-            ]);
-        $videoList = $videoRepository
-            ->findBy([
-                'trick' => $trick
-            ]);
-
         $form = $this->createForm(CommentType::class);
         $form->handleRequest($request);
 
@@ -91,7 +75,7 @@ class ArticleController extends AbstractController
 
             $user = $this->getUser();
             $comment->setUser($user);
-            $comment->setTrick($trick)->getId();
+            $comment->setTrick($trick);
 
             $manager->persist($comment);
             $manager->flush();
@@ -101,21 +85,13 @@ class ArticleController extends AbstractController
                 'Votre message a bien été envoyé.'
             );
             return $this->redirectToRoute('app_trick', [
-                'trick' => $trick,
                 'id' => $trick->getId(),
-                'form' => $form->createView(),
-                'commentList' => $commentList,
-                'imageList' => $imageList,
-                'videoList' => $videoList,
             ]);
         }
 
         return $this->render('trick/trick.html.twig', [
             'form' => $form->createView(),
             'trick' => $trick,
-            'commentList' => $commentList,
-            'imageList' => $imageList,
-            'videoList' => $videoList,
         ]);
     }
 
@@ -131,7 +107,7 @@ class ArticleController extends AbstractController
         $form = $this->createForm(TrickType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() AND $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $path = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
             $trick = $form->getData();

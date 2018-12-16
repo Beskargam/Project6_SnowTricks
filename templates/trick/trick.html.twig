@@ -6,12 +6,8 @@
 
 {% block body %}
     <div class="container body-box">
-        <div class="row">
-            <div class=" col-sm-12">
-                <h1 class="display-4 text-center trick-title">Modification du Trick : "{{ trick.title }}"</h1>
-            </div>
-        </div>{% if trick.images is defined %}
-        {% for image in imageList if image.main == 1 %}
+        {% if trick.images is defined %}
+            {% for image in trick.images if image.main == 1 %}
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card home-card">
@@ -21,21 +17,21 @@
                         </div>
                     </div>
                 </div>
-        {% endfor %}
-    {% else %}
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card home-card">
-                    <img class="card-img-top"
-                         src="{{ asset('images/default_trickImage.jpg') }}"
-                         alt="Card image cap">
+            {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card home-card">
+                        <img class="card-img-top"
+                             src="{{ asset('images/default_trickImage.jpg') }}"
+                             alt="Card image cap">
+                    </div>
                 </div>
             </div>
-        </div>
         {% endif %}
         {% if trick.images is defined %}
             <div class="row d-flex">
-                {% for image in imageList %}
+                {% for image in trick.images %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
                             <img class="card-img-top card-img-display"
@@ -108,8 +104,8 @@
         </div>
         <hr>
         <div class="row justify-content-center">
-            {% if commentList is defined %}
-                {% for comment in commentList %}
+            {% if trick.comments is defined %}
+                {% for comment in trick.comments %}
                     <div class="col-sm-12">
                         <div class="card home-card">
                             <div class="card-header">

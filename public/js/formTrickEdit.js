@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    /*// Field MainImage Edit
+    // Field MainImage Edit
     $('.field-mainImg-edit').hide();
     $('.btn-mainImg-edit').click(function (e) {
         $('.field-mainImg-edit').show();
@@ -45,7 +45,7 @@ $(document).ready(function () {
 
         e.preventDefault();
         return false
-    });*/
+    });
 
 
     // Images
