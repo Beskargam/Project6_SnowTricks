@@ -24,7 +24,7 @@ $(document).ready(function () {
         });
     }
 
-    if (indexImage === 0) {
+    if (indexImage === 1) {
         addImage($containerImage);
     } else {
         $containerImage.children('div').each(function () {
@@ -69,7 +69,7 @@ $(document).ready(function () {
         return false;
     });
 
-    if (indexVideo === 0) {
+    if (indexVideo === 1) {
         addVideo($containerVideo);
     } else {
         $containerVideo.children('div').each(function () {

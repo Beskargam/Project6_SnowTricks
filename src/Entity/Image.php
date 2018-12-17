@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -19,6 +20,7 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'image doit avoir une URL")
      */
     private $name;
 

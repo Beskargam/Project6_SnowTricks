@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
@@ -18,11 +19,13 @@ class Video
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La vidéo doit avoir une URL")
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La vidéo doit avoir un Nom")
      */
     private $alt;
 

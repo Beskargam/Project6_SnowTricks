@@ -15,49 +15,15 @@
             </div>
         </div>
         {% if trick.images is defined %}
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card home-card">
-                        <img class="card-img-top card-img-display"
-                             src="{#{{ asset('uploads/images/' ~ trick.images, {'main' : 1}) }}#}"
-                             alt="Image Principale">
-                        <div class="card-footer">
-                            <div class="field-mainImg-edit">
-                                {# Form here #}
-                            </div>
-                            <button class="btn btn-mainImg-delete float-right">
-                                <span class="oi oi-trash"></span>
-                            </button>
-                            <button class="btn btn-mainImg-edit action-button-space float-right">
-                                <span class="oi oi-pencil"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card home-card">
-                        <img class="card-img-top"
-                             src="{{ asset('images/default_trickImage.jpg') }}"
-                             alt="Card image cap">
-                    </div>
-                </div>
-            </div>
-        {% endif %}
-        {% if trick.images is defined %}
             <div class="row d-flex">
                 {% for image in form.images %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            {{ dump(image.vars.data.name) }}
                             <img class="card-img-top card-img-display"
                                  src="{{ asset('uploads/images/' ~ image.vars.data.name ) }}"
                                  alt="">
                             <div class="card-footer">
                                 <div class="field-img-edit">
-                                    {# Form here #}
                                     {{ form_widget(image) }}
                                 </div>
                                 <button class="btn btn-img-delete float-right">
@@ -75,16 +41,17 @@
 
         <div class="row d-flex">
             {% if trick.videos is defined %}
-                {% for video in videoList %}
+                {% for video in form.videos %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
+                            {{ dump(video.vars.data.url) }}
                             <embed class="card-img-top card-video-display"
-                                   src="https://www.youtube.com/embed/{{ video.url }}"
+                                   src="https://www.youtube.com/embed/{{ video.vars.data.url }}"
                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                    allowfullscreen>
                             <div class="card-footer">
                                 <div class="field-video-edit">
-                                    {# Form here #}
+                                    {{ form_widget(video) }}
                                 </div>
                                 <button class="btn btn-video-delete float-right">
                                     <span class="oi oi-trash"></span>

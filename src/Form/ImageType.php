@@ -18,12 +18,12 @@ class ImageType extends AbstractType
                 'label' => false,
                 'required' => false,
             ])
-        /*->add('main', CheckboxType::class, [
+        ->add('main', CheckboxType::class, [
                 'attr' => [
                     'class' => 'mainButton'
                 ],
                 'label' => 'Image principale',
-                ])*/
+                ])
         ;
     }
 

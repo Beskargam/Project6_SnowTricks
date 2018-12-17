@@ -27,17 +27,13 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function homepage(TrickRepository $trickRepository,
-                             ImageRepository $imageRepository)
+    public function homepage(TrickRepository $trickRepository)
     {
         $trickList = $trickRepository
             ->findAll();
-        $mainImageList = $imageRepository
-            ->findByMain(1);
 
         return $this->render('home/home.html.twig', [
             'trickList' => $trickList,
-            'mainImageList' => $mainImageList,
         ]);
     }
 
@@ -98,10 +94,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/ajouter", name="add")
      */
-    public function add(CommentRepository $commentRepository,
-                        ImageRepository $imageRepository,
-                        VideoRepository $videoRepository,
-                        EntityManagerInterface $manager,
+    public function add(EntityManagerInterface $manager,
                         Request $request)
     {
         $form = $this->createForm(TrickType::class);
@@ -115,21 +108,21 @@ class ArticleController extends AbstractController
             // images uploads
             $images = $trick->getImages();
             foreach ($images as $image) {
-                $file = $image->getFile();
-                $name = $this->generateUniqueFileName() . '.' . $file->guessExtension();
+                    $file = $image->getFile();
+                    $name = $this->generateUniqueFileName() . '.' . $file->guessExtension();
 
-                $file->move($path, $name);
-                $image->setName($name);
+                    $file->move($path, $name);
+                    $image->setName($name);
             }
 
             // videos
             $videos = $trick->getVideos();
             foreach ($videos as $video) {
                 $originalUrl = $video->getUrl();
-                $discardUrl = 'https://www.youtube.com/watch?v=';
-                $transformedUrl = str_replace($discardUrl, "", $originalUrl);
-                $video->setUrl($transformedUrl);
-
+                // $discardUrl = 'https://www.youtube.com/watch?v=';
+                // $transformedUrl = str_replace($discardUrl, "", $originalUrl);
+                preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $originalUrl, $transformedUrl);
+                $video->setUrl($transformedUrl[1]);
             }
 
             $manager->persist($trick);
@@ -140,27 +133,8 @@ class ArticleController extends AbstractController
                 'Le Trick a bien été enregistré.'
             );
 
-            $form = $this->createForm(CommentType::class);
-            $commentList = $commentRepository
-                ->findBy([
-                    'trick' => $trick,
-                ]);
-            $imageList = $imageRepository
-                ->findBy([
-                    'trick' => $trick
-                ]);
-            $videoList = $videoRepository
-                ->findBy([
-                    'trick' => $trick
-                ]);
-
             return $this->redirectToRoute('app_trick', [
                 'id' => $trick->getId(),
-                'trick' => $trick,
-                'form' => $form->createView(),
-                'commentList' => $commentList,
-                'imageList' => $imageList,
-                'videoList' => $videoList,
             ]);
         }
 
@@ -180,22 +154,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/modifier/{id<\d+>}", name="edit")
      */
-    public function edit(CommentRepository $commentRepository,
-                         ImageRepository $imageRepository,
-                         VideoRepository $videoRepository,
-                         EntityManagerInterface $manager,
+    public function edit(EntityManagerInterface $manager,
                          Request $request,
                          Trick $trick)
     {
-        $imageList = $imageRepository
-            ->findBy([
-                'trick' => $trick
-            ]);
-        $videoList = $videoRepository
-            ->findBy([
-                'trick' => $trick
-            ]);
-
         $form = $this->createForm(TrickType::class, $trick);
         $form->getData();
 
@@ -215,7 +177,7 @@ class ArticleController extends AbstractController
             }
 
             // videos
-            $videos = $trick->getVideos(); // TODO : Attempted to call an undefined method named "getVideos" of class "Doctrine\ORM\PersistentCollection"
+            $videos = $trick->getVideos();
             foreach ($videos as $video) {
                 $originalUrl = $video->getUrl();
                 $discardUrl = 'https://www.youtube.com/watch?v=';
@@ -226,30 +188,18 @@ class ArticleController extends AbstractController
             $manager->persist($trick);
             $manager->flush();
 
-            $this->addFlash('success', 'Le Trick a bien été modifié.');
-
-            // redirect rendering
-            $form = $this->createForm(CommentType::class);
-            $commentList = $commentRepository
-                ->findBy([
-                    'trick' => $trick,
-                ]);
+            $this->addFlash(
+                'success',
+                'Le Trick a bien été modifié.');
 
             return $this->redirectToRoute('app_trick', [
-                'form' => $form->createView(),
-                'trick' => $trick,
                 'id' => $trick->getId(),
-                'commentList' => $commentList,
-                'imageList' => $imageList,
-                'videoList' => $videoList,
             ]);
         }
 
         return $this->render('trick/edit.html.twig', [
             'form' => $form->createView(),
             'trick' => $trick,
-            'imageList' => $imageList,
-            'videoList' => $videoList,
         ]);
     }
 
