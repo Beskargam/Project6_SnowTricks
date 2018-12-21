@@ -17,10 +17,6 @@ class VideoType extends AbstractType
                 'label' => 'URL de la vidéo :',
                 'required' => true,
             ])
-            ->add('alt', TextType::class, [
-                'label' => 'Titre de la vidéo :',
-                'required' => true,
-            ])
         ;
     }
 

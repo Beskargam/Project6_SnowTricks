@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TrickRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields="title", message="Ce Tricks existe déjà")
  */
 class Trick
@@ -152,7 +154,7 @@ class Trick
         return $this->images;
     }
 
-    public function addImage(Image $image): self
+    public function addImage(Image $image = null): self
     {
         if (!$this->images->contains($image)) {
             $this->images->add($image);
@@ -181,9 +183,9 @@ class Trick
         return $this->videos;
     }
 
-    public function addVideo(Video $video): self
+    public function addVideo(Video $video = null): self
     {
-        if (!$this->videos->contains($video)) {
+        if (!$this->videos->contains($video) && $video !== null) {
             $this->videos->add($video);
             $video->setTrick($this);
         }

@@ -20,10 +20,12 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="L'image doit avoir une URL")
      */
     private $name;
 
+    /**
+     * @Assert\Image()
+     */
     private $file;
 
     /**

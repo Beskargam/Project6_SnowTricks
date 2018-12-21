@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Supprimer une Video
+{% endblock %}
+
+{% block body %}
+    <section class="flipboard-box">
+        <div class="container body-box">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-6 col-lg-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Supprimer une Video</h1>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card home-card">
+                                <embed class="card-img-top card-video-display"
+                                       src="https://www.youtube.com/embed/{{ video.url }}"
+                                       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                       allowfullscreen>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        Etes-vous sûr de vouloir supprimer cette Video ?
+                    </p>
+                    <form action="{{ path('app_deleteVideo', {'trick_id' : video.trick.id, 'id' : video.id}) }}"
+                          method="post">
+                        <a href="{{ path('app_editTrick', {'id' : video.trick.id,}) }}" class="btn btn-default">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Retour au Trick
+                        </a>
+                        <input type="submit" value="Supprimer" class="btn btn-danger"/>
+                        {{ form_rest(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

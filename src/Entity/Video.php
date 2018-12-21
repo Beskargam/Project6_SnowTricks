@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
@@ -19,15 +18,8 @@ class Video
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La vidéo doit avoir une URL")
      */
     private $url;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="La vidéo doit avoir un Nom")
-     */
-    private $alt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\trick", inversedBy="videos")
@@ -48,18 +40,6 @@ class Video
     public function setUrl(string $url): self
     {
         $this->url = $url;
-
-        return $this;
-    }
-
-    public function getAlt(): ?string
-    {
-        return $this->alt;
-    }
-
-    public function setAlt(string $alt): self
-    {
-        $this->alt = $alt;
 
         return $this;
     }

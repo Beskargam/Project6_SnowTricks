@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Supprimer une Image
+{% endblock %}
+
+{% block body %}
+    <section class="flipboard-box">
+        <div class="container body-box">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-6 col-lg-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Supprimer une Image</h1>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card home-card">
+                                <img class="card-img-top card-img-display"
+                                     src="{{ asset('uploads/images/' ~ image.name ) }}"
+                                     alt="Image Principale">
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        Etes-vous sûr de vouloir supprimer cette image ?
+                    </p>
+                    <form action="{{ path('app_deleteImage', {'trick_id' : image.trick.id, 'id' : image.id}) }}"
+                          method="post">
+                        <a href="{{ path('app_editTrick', {'id' : image.trick.id,}) }}" class="btn btn-default">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Retour au Trick
+                        </a>
+                        <input type="submit" value="Supprimer" class="btn btn-danger"/>
+                        {{ form_rest(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

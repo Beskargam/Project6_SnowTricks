@@ -19,19 +19,20 @@
                 {% for image in form.images %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
+                            {{ dump(image) }}
                             <img class="card-img-top card-img-display"
                                  src="{{ asset('uploads/images/' ~ image.vars.data.name ) }}"
-                                 alt="">
+                                 alt="{{ image.vars.data.name }}">
                             <div class="card-footer">
-                                <div class="field-img-edit">
+                                {#<div class="field-img-edit">
                                     {{ form_widget(image) }}
-                                </div>
-                                <button class="btn btn-img-delete float-right">
+                                </div>#}
+                                <a class="btn btn-warning btn-img-delete float-right" href="{{ path('app_deleteImage', {'id' : image.vars.data.id}) }}">
                                     <span class="oi oi-trash"></span>
-                                </button>
-                                <button class="btn btn-img-edit action-button-space float-right">
+                                </a>
+                                <a class="btn btn-warning btn-img-edit action-button-space float-right">
                                     <span class="oi oi-pencil"></span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -50,15 +51,15 @@
                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                    allowfullscreen>
                             <div class="card-footer">
-                                <div class="field-video-edit">
+                                {#<div class="field-video-edit">
                                     {{ form_widget(video) }}
-                                </div>
-                                <button class="btn btn-video-delete float-right">
+                                </div>#}
+                                <a class="btn btn-warning btn-video-delete float-right" href="{{ path('app_deleteVideo', {'id' : video.vars.data.id}) }}">
                                     <span class="oi oi-trash"></span>
-                                </button>
-                                <button class="btn btn-video-edit action-button-space float-right">
+                                </a>
+                                <a class="btn btn-warning btn-video-edit action-button-space float-right">
                                     <span class="oi oi-pencil"></span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -99,7 +100,7 @@
                     </div>
                     <div class="field-space">
                         <a class="btn btn-danger float-right"
-                           href="{{ path('app_delete', {'id' : trick.id}) }}">Supprimer</a>
+                           href="{{ path('app_deleteTrick', {'id' : trick.id}) }}">Supprimer</a>
                         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary float-right action-button-space'}}) }}
                     </div>
                 </div>
