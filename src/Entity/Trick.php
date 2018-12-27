@@ -156,14 +156,14 @@ class Trick
 
     public function addImage(Image $image = null): self
     {
-        if (!$this->images->contains($image)) {
+        if (!$this->images->contains($image) && $image !== null) {
             $this->images->add($image);
             $image->setTrick($this);
         }
         return $this;
     }
 
-    public function removeImage(Image $image): self
+    public function removeImage(Image $image = null): self
     {
         if ($this->images->contains($image)) {
             $this->images->removeElement($image);
@@ -189,7 +189,6 @@ class Trick
             $this->videos->add($video);
             $video->setTrick($this);
         }
-
         return $this;
     }
 

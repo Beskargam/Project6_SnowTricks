@@ -19,19 +19,17 @@
                 {% for image in form.images %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            {{ dump(image) }}
+                            {{ dump(image.vars.data.file) }}
                             <img class="card-img-top card-img-display"
                                  src="{{ asset('uploads/images/' ~ image.vars.data.name ) }}"
                                  alt="{{ image.vars.data.name }}">
                             <div class="card-footer">
-                                {#<div class="field-img-edit">
+                                <div class="field-img-edit">
                                     {{ form_widget(image) }}
-                                </div>#}
-                                <a class="btn btn-warning btn-img-delete float-right" href="{{ path('app_deleteImage', {'id' : image.vars.data.id}) }}">
+                                </div>
+                                <a class="btn btn-warning btn-img-delete float-right"
+                                   href="{{ path('app_deleteImage', {'id' : image.vars.data.id}) }}">
                                     <span class="oi oi-trash"></span>
-                                </a>
-                                <a class="btn btn-warning btn-img-edit action-button-space float-right">
-                                    <span class="oi oi-pencil"></span>
                                 </a>
                             </div>
                         </div>
@@ -46,10 +44,10 @@
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
                             {{ dump(video.vars.data.url) }}
-                            <embed class="card-img-top card-video-display"
+                            <iframe class="card-img-top card-video-display"
                                    src="https://www.youtube.com/embed/{{ video.vars.data.url }}"
                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                   allowfullscreen>
+                                    allowfullscreen></iframe>
                             <div class="card-footer">
                                 {#<div class="field-video-edit">
                                     {{ form_widget(video) }}
@@ -85,8 +83,7 @@
                     <div class="field-space">
                         <div class="row">
                             <div class="col-sm-10 col-md-6 col-lg-4">
-                                {{ form_widget(form.images) }}
-                                <a href="#" id="add_image" class="btn btn-warning">Ajouter une image</a>
+                                <a href="{{ path('app_addImage', {'id' : trick.id}) }}" id="add_image" class="btn btn-warning">Ajouter une image</a>
                             </div>
                         </div>
                     </div>
@@ -106,9 +103,6 @@
                 </div>
             </div>
         </div>
-        <div class="field-space">
-            {{ form_rest(form) }}
-        </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}
@@ -117,9 +111,4 @@
     {{ parent() }}
 
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-
-    <script src="{{ asset('js/formTrickEdit.js') }}"></script>
 {% endblock %}

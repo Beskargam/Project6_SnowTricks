@@ -30,14 +30,9 @@ class Image
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $trick;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $main;
 
     public function getId(): ?int
     {
@@ -54,6 +49,24 @@ class Image
         $this->name = $name;
 
         return $this;
+    }
+
+    public function handle($path)
+    {
+        if (null === $this->file) {
+            return;
+        }
+        $name = $this->generateUniqueFileName() . '.' . $this->file->guessExtension();
+        $this->setName($name);
+        $this->file->move($path, $name);
+    }
+
+    /**
+     * @return string
+     */
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
     }
 
     public function getFile()
@@ -74,18 +87,6 @@ class Image
     public function setTrick(?Trick $trick): self
     {
         $this->trick = $trick;
-
-        return $this;
-    }
-
-    public function getMain(): ?int
-    {
-        return $this->main;
-    }
-
-    public function setMain(int $main): self
-    {
-        $this->main = $main;
 
         return $this;
     }

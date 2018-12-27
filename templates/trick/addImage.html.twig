@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Ajouter une Image
+{% endblock %}
+
+{% block body %}
+    <section class="flipboard-box">
+        <div class="container body-box">
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-6 col-lg-4">
+                    <h1 class="h3 mb-3 font-weight-normal">Ajouter une Image</h1>
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card home-card">
+                                {{ dump(trick) }}
+                                {{ form_label(form.images) }}
+                                {{ form_widget(form.images) }}
+                                <a href="#" id="add_image" class="btn btn-warning">Ajouter une image</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-space">
+                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary float-right action-button-space'}}) }}
+                    </div>
+                    {{ form_end(form) }}
+                    <a href="{{ path('app_editTrick', {'id' : trick.id}) }}" class="btn btn-default">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Retour au Trick
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/formTrickEdit.js') }}"></script>
+{% endblock %}

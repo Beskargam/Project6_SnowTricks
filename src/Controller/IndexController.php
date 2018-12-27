@@ -8,6 +8,8 @@ use App\Entity\Trick;
 use App\Form\CommentType;
 use App\Form\TrickType;
 use App\Repository\TrickRepository;
+use App\Services\ImageHandler;
+use App\Services\VideoHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -88,43 +90,25 @@ class IndexController extends AbstractController
     /**
      * @Route("/ajouter", name="add")
      */
-    public function add(EntityManagerInterface $manager,
-                        Request $request)
+    public function trickAdd(EntityManagerInterface $manager,
+                        Request $request,
+                        ImageHandler $imageHandler,
+                        VideoHandler $videoHandler)
     {
         $addTrickForm = $this->createForm(TrickType::class);
         $addTrickForm->handleRequest($request);
 
         if ($addTrickForm->isSubmitted() && $addTrickForm->isValid()) {
-
             $trick = $addTrickForm->getData();
-            $path = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
 
             // images uploads
+            $path = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
             $images = $trick->getImages();
-            foreach ($images as $image) {
-                $file = $image->getFile();
-                $name = $this->generateUniqueFileName() . '.' . $file->guessExtension();
-                $file->move($path, $name);
-                $image->setName($name);
-            }
-            // images uploads
-            $images = $trick->getImages();
-            foreach ($images as $image) {
-                $file = $image->getFile();
-                $name = $this->generateUniqueFileName() . '.' . $file->guessExtension();
-                $file->move($path, $name);
-                $image->setName($name);
-            }
+            $imageHandler->handleImages($images, $path);
 
             // videos
             $videos = $trick->getVideos();
-            foreach ($videos as $video) {
-                $originalUrl = $video->getUrl();
-                if ($originalUrl !== null) {
-                    preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $originalUrl, $transformedUrl);
-                    $video->setUrl($transformedUrl[1]);
-                }
-            }
+            $videoHandler->handleVideos($videos);
 
             $manager->persist($trick);
             $manager->flush();
@@ -145,10 +129,28 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @return string
+     * @Route("/supprimer/trick-{id<\d+>}", name="deleteTrick")
      */
-    private function generateUniqueFileName()
+    public function trickDelete(Request $request,
+                           EntityManagerInterface $manager,
+                           Trick $trick)
     {
-        return md5(uniqid());
+        $deleteTrickForm = $this->get('form.factory')->create();
+
+        if ($request->isMethod('POST') && $deleteTrickForm->handleRequest($request)->isValid()) {
+            $manager->remove($trick);
+            $manager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Le Trick a bien été supprimé.');
+
+            return $this->redirectToRoute('app_homepage');
+        }
+
+        return $this->render('trick/deleteTrick.html.twig', [
+            'trick' => $trick,
+            'form' => $deleteTrickForm->createView(),
+        ]);
     }
 }
