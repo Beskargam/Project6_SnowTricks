@@ -15,7 +15,7 @@ class VideoType extends AbstractType
         $builder
             ->add('url', TextareaType::class, [
                 'label' => 'URL Iframe de la vidéo :',
-                'help' => 'L\'URL Iframe correspond à l\'URL Embed d\'une video',
+                'help' => 'L\'URL Iframe correspond à l\'URL Embed d\'une video. Par exemple : https://www.dailymotion.com/embed/video/x2m8jpp',
                 'required' => true,
             ])
         ;

@@ -41,10 +41,6 @@ class IndexController extends AbstractController
         $trickList = $trickRepository
             ->findAll();
 
-        if (!$trickList) {
-            throw $this->createNotFoundException('Aucun Trick trouvé !');
-        }
-
         return $this->render('trick/tricksList.html.twig', [
             'trickList' => $trickList
         ]);
