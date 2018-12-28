@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Aure
- * Date: 26.11.2018
- * Time: 16:18
- */
 
 namespace App\Form;
 
@@ -46,7 +40,7 @@ class TrickType extends AbstractType
                 'allow_delete' => true,
                 'required' => false,
                 'by_reference' => false,
-                'label' => 'Ajout d\'images :',
+                'label' => false,
             ])
             ->add('videos', CollectionType::class, [
                 'entry_type' => VideoType::class,
@@ -54,7 +48,7 @@ class TrickType extends AbstractType
                 'allow_delete' => true,
                 'required' => false,
                 'by_reference' => false,
-                'label' => 'Ajout de vidéos :',
+                'label' => false,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrement',

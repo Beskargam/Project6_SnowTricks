@@ -108,7 +108,7 @@ class IndexController extends AbstractController
 
             // videos
             $videos = $trick->getVideos();
-            $videoHandler->handleVideos($videos);
+            $videoHandler->handleVideos($videos, $trick);
 
             $manager->persist($trick);
             $manager->flush();

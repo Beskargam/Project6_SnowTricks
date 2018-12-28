@@ -44,12 +44,6 @@ class Video
         return $this;
     }
 
-    public function handle()
-    {
-        preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $this->getUrl(), $url);
-        $this->setUrl($url);
-    }
-
     public function getTrick(): ?trick
     {
         return $this->trick;

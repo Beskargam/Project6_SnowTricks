@@ -3,11 +3,10 @@
 namespace App\Form;
 
 
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AddImageType extends AbstractType
+class AddVideoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -15,7 +14,7 @@ class AddImageType extends AbstractType
             ->remove('title')
             ->remove('content')
             ->remove('groupTrick')
-            ->remove('videos');
+            ->remove('images');
     }
 
     public function getParent()

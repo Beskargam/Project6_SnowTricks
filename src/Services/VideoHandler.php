@@ -5,10 +5,10 @@ namespace App\Services;
 
 class VideoHandler
 {
-    public function handleVideos($videos)
+    public function handleVideos($videos, $trick)
     {
         foreach ($videos as $video) {
-            $video->handle();
+            $trick->addVideo($video);
         }
     }
 }

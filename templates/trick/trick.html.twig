@@ -7,6 +7,7 @@
 {% block body %}
     <div class="container body-box">
         {% for image in trick.images %}
+            {% if loop.first %}
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card home-card">
@@ -16,6 +17,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         {% else %}
             <div class="row">
                 <div class="col-sm-12">
@@ -32,7 +34,6 @@
                 {% for image in trick.images %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            {{ dump(image.name) }}
                             <img class="card-img-top card-img-display"
                                  src="{{ asset('uploads/images/' ~ image.name ) }}"
                                  alt="{{ image.name }}">
@@ -46,10 +47,10 @@
                 {% for video in trick.videos %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            {{ dump(video.url) }}
-                            <embed class="card-img-top" src="https://www.youtube.com/embed/{{ video.url }}"
-                                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                   allowfullscreen>
+                            <iframe src="{{ video.url }}"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
                         </div>
                     </div>
                 {% endfor %}

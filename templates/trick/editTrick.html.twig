@@ -19,7 +19,6 @@
                 {% for image in form.images %}
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
-                            {{ dump(image.vars.data.file) }}
                             <img class="card-img-top card-img-display"
                                  src="{{ asset('uploads/images/' ~ image.vars.data.name ) }}"
                                  alt="{{ image.vars.data.name }}">
@@ -44,19 +43,16 @@
                     <div class="trick-galery-box col-sm-12 col-md-6 col-lg-3">
                         <div class="card home-card">
                             {{ dump(video.vars.data.url) }}
-                            <iframe class="card-img-top card-video-display"
-                                   src="https://www.youtube.com/embed/{{ video.vars.data.url }}"
-                                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            <iframe src="{{ video.vars.data.url }}"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
                             <div class="card-footer">
-                                {#<div class="field-video-edit">
+                                <div class="field-video-edit">
                                     {{ form_widget(video) }}
-                                </div>#}
+                                </div>
                                 <a class="btn btn-warning btn-video-delete float-right" href="{{ path('app_deleteVideo', {'id' : video.vars.data.id}) }}">
                                     <span class="oi oi-trash"></span>
-                                </a>
-                                <a class="btn btn-warning btn-video-edit action-button-space float-right">
-                                    <span class="oi oi-pencil"></span>
                                 </a>
                             </div>
                         </div>
@@ -84,14 +80,14 @@
                         <div class="row">
                             <div class="col-sm-10 col-md-6 col-lg-4">
                                 <a href="{{ path('app_addImage', {'id' : trick.id}) }}" id="add_image" class="btn btn-warning">Ajouter une image</a>
+                                <a href="{{ path('app_addVideo', {'id' : trick.id}) }}" id="add_video" class="btn btn-warning">Ajouter une video</a>
                             </div>
                         </div>
                     </div>
                     <div class="field-space">
                         <div class="row">
                             <div class="col-sm-10 col-md-6 col-lg-4">
-                                {{ form_widget(form.videos) }}
-                                <a href="#" id="add_video" class="btn btn-warning">Ajouter une video</a>
+
                             </div>
                         </div>
                     </div>

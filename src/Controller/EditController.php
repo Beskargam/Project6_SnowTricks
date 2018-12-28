@@ -6,6 +6,7 @@ use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\AddImageType;
+use App\Form\AddVideoType;
 use App\Form\TrickType;
 use App\Services\ImageHandler;
 use App\Services\VideoHandler;
@@ -46,7 +47,7 @@ class EditController extends AbstractController
 
             // videos
             $videos = $trick->getVideos();
-            $videoHandler->handleVideos($videos);
+            $videoHandler->handleVideos($videos, $trick);
 
             $manager->flush();
 
@@ -68,16 +69,18 @@ class EditController extends AbstractController
     /**
      * @Route("/modifier/figure-{id<\d+>}/ajouter-une-image", name="addImage")
      */
-    public function editImage(EntityManagerInterface $manager,
-                              Request $request,
-                              Trick $trick,
-                              ImageHandler $imageHandler)
+    public function addImage(EntityManagerInterface $manager,
+                             Request $request,
+                             Trick $trick,
+                             ImageHandler $imageHandler)
     {
 
-        $addImageForm = $this->createForm(AddImageType::class, $trick);
+        $addImageForm = $this->createForm(AddImageType::class);
         $addImageForm->handleRequest($request);
 
         if ($request->isMethod('POST') && $addImageForm->isValid()) {
+
+            // image uploads
             $path = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
             $images = $trick->getImages();
             $imageHandler->handleImages($images, $path);
@@ -87,7 +90,7 @@ class EditController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'image a bien été ajouté.');
+                'Enregistrement ràussi !');
 
             return $this->redirectToRoute('app_editTrick', [
                 'id' => $trick->getId(),
@@ -129,6 +132,44 @@ class EditController extends AbstractController
             'image' => $image,
             //'form' => $deleteImageForm->getForm()->createView(),
             'form' => $deleteImageForm->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/modifier/figure-{id<\d+>}/ajouter-une-video", name="addVideo")
+     */
+    public function addVideo(EntityManagerInterface $manager,
+                             Request $request,
+                             Trick $trick,
+                             VideoHandler $videoHandler)
+    {
+
+        $addVideoForm = $this->createForm(AddVideoType::class);
+        $addVideoForm->handleRequest($request);
+
+        if ($request->isMethod('POST') && $addVideoForm->isValid()) {
+            $trick = $addVideoForm->getData();
+
+            // videos
+            $videos = $trick->getVideos();
+            $videoHandler->handleVideos($videos);
+
+            $manager->persist($trick);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Enregistrement ràussi !');
+
+            return $this->redirectToRoute('app_editTrick', [
+                'id' => $trick->getId(),
+            ]);
+
+        }
+
+        return $this->render('trick/addVideo.html.twig', [
+            'form' => $addVideoForm->createView(),
+            'trick' => $trick,
         ]);
     }
 
