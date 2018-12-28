@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ad082b48-1936-4ade-8022-092a52648f41" name="Default Changelist" comment="" />
+    <list default="true" id="ad082b48-1936-4ade-8022-092a52648f41" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,14 +18,14 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.47586206">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Controller/IndexController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="535">
-                  <caret line="92" column="61" selection-start-line="92" selection-start-column="61" selection-end-line="92" selection-end-column="61" />
+                <state relative-caret-position="1581">
+                  <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
                   <folding>
                     <element signature="e#35#58#0#PHP" expanded="true" />
                   </folding>
@@ -27,11 +33,15 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/.env">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/Controller/RegistrationController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+                <state relative-caret-position="612">
+                  <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+                  <folding>
+                    <element signature="e#34#56#0#PHP" expanded="true" />
+                    <element signature="e#2014#2047#0#PHP" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -39,15 +49,14 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+        <leaf>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/Controller/EditController.php">
+            <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="47" column="21" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
+                <state relative-caret-position="408">
+                  <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="57" selection-end-column="13" />
                   <folding>
-                    <element signature="e#34#55#0#PHP" expanded="true" />
-                    <element signature="e#5278#5304#0#PHP" expanded="true" />
+                    <element signature="e#34#54#0#PHP" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -76,6 +85,7 @@
       <find>AND</find>
       <find>$editImageForm</find>
       <find>$addImageForm</find>
+      <find>$entityManager</find>
     </findStrings>
     <replaceStrings>
       <replace>$trickList</replace>
@@ -92,6 +102,7 @@
       <replace>&amp;&amp;</replace>
       <replace>$addImageForm</replace>
       <replace>$addVideoForm</replace>
+      <replace>$manager</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -110,7 +121,6 @@
         <option value="$PROJECT_DIR$/public/css/styles.css" />
         <option value="$PROJECT_DIR$/config/packages/framework.yaml" />
         <option value="$PROJECT_DIR$/config/packages/test/swiftmailer.yaml" />
-        <option value="$PROJECT_DIR$/src/Controller/SecurityController.php" />
         <option value="$PROJECT_DIR$/public/js/formTrickAdd.js" />
         <option value="$PROJECT_DIR$/templates/trick/form.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/ArticleController.php" />
@@ -137,13 +147,15 @@
         <option value="$PROJECT_DIR$/public/js/formAddVideo.js" />
         <option value="$PROJECT_DIR$/templates/trick/addVideo.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/TrickType.php" />
-        <option value="$PROJECT_DIR$/src/Controller/IndexController.php" />
         <option value="$PROJECT_DIR$/src/Services/VideoHandler.php" />
         <option value="$PROJECT_DIR$/templates/trick/trick.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/EditController.php" />
         <option value="$PROJECT_DIR$/src/Form/VideoType.php" />
         <option value="$PROJECT_DIR$/templates/trick/editTrick.html.twig" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/src/Controller/IndexController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/SecurityController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/RegistrationController.php" />
       </list>
     </option>
   </component>
@@ -262,7 +274,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -331,6 +342,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -379,17 +391,19 @@
       <workItem from="1545816277493" duration="7057000" />
       <workItem from="1545914810406" duration="14469000" />
       <workItem from="1545931849313" duration="7219000" />
-      <workItem from="1545987319698" duration="7859000" />
+      <workItem from="1545987319698" duration="7966000" />
+      <workItem from="1546001390216" duration="4436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167597000" />
+    <option name="totallyTimeSpent" value="172140000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.08635394" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.14285715" />
       <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.13113007" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -435,23 +449,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/RegistrationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding>
-            <element signature="e#34#56#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="67" column="62" selection-start-line="67" selection-start-column="62" selection-end-line="67" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/uploads/images/758aee0f7c84bf574aa6618da1e95b57.jpeg" />
     <entry file="file://$PROJECT_DIR$/public/uploads/images/a851fd307c109250230e8e447265a5b2.jpeg" />
     <entry file="file://$PROJECT_DIR$/public/uploads/images/6a6d8be4c6a6f2905f1ef57f3ba042c3.jpeg" />
@@ -558,9 +555,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/uploads/images/b28a0023d62d0ec8212280e2d83a4730.jpeg" />
     <entry file="file://$PROJECT_DIR$/public/uploads/images/6c1b1a97113246008440ff40c3e1bedd.jpeg" />
-    <entry file="file://$PROJECT_DIR$/public/uploads/images/5c6701c53979a5503e4cfd92112cce8d.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/public/uploads/images/5c6701c53979a5503e4cfd92112cce8d.jpeg" />
     <entry file="file://$PROJECT_DIR$/public/uploads/images/dad048245bdcb57df0d5d3ec318189ed.jpeg" />
     <entry file="file://$PROJECT_DIR$/public/uploads/images/097ca9eb81403f8f7956c9aba4eec7f5.jpeg" />
     <entry file="file://$PROJECT_DIR$/src/Entity/Trick.php">
@@ -730,10 +725,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="92" column="61" selection-start-line="92" selection-start-column="61" selection-end-line="92" selection-end-column="61" />
+        <state relative-caret-position="1581">
+          <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
           <folding>
             <element signature="e#35#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="57" selection-end-column="13" />
+          <folding>
+            <element signature="e#34#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/RegistrationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+          <folding>
+            <element signature="e#34#56#0#PHP" expanded="true" />
+            <element signature="e#2014#2047#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -6,6 +6,7 @@ use App\Form\UserType;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -17,7 +18,9 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/enregistrement", name="register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(Request $request,
+                             UserPasswordEncoderInterface $passwordEncoder,
+                             \Swift_Mailer $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -32,9 +35,18 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // todo send email confirmation
+            $message = (new \Swift_Message('Confirmation d\'inscription SnowTricks'))
+                ->setFrom('zenways@laposte.net')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    "Nous confirmons votre inscription sur le site SnowTricks",
+                    'text/html'
+                );
+            $mailer->send($message);
 
-            $this->addFlash('success', 'Bienvenue ! Afin de finaliser votre enregistrement nous vous avons envoyé un Email de confirmation');
+            $this->addFlash(
+                'success',
+                'Bienvenue ! Nous vous avons envoyé un Email de confirmation');
 
             return $this->redirectToRoute('app_homepage');
         }

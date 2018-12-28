@@ -41,7 +41,10 @@ class SecurityController extends AbstractController
     /**
      * @Route("/oubli/motdepasse", name="forgotten_password")
      */
-    public function forgottenPassword(Request $request, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
+    public function forgottenPassword(Request $request,
+                                      UserPasswordEncoderInterface $encoder,
+                                      \Swift_Mailer $mailer,
+                                      TokenGeneratorInterface $tokenGenerator): Response
     {
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
@@ -55,7 +58,7 @@ class SecurityController extends AbstractController
             }
             $token = $tokenGenerator->generateToken();
 
-            try{
+            try {
                 $user->setResetToken($token);
                 $entityManager->flush();
             } catch (\Exception $e) {
@@ -72,7 +75,6 @@ class SecurityController extends AbstractController
                     "Suivez le lien pour réinitialiser votre mot de passe : " . $url,
                     'text/html'
                 );
-
             $mailer->send($message);
 
             $this->addFlash('notice', 'Un Email vous a été envoyé');
@@ -86,7 +88,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/reinitialisation/motdepasse/{token}", name="reset_password")
      */
-    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder)
+    public function resetPassword(Request $request,
+                                  string $token,
+                                  UserPasswordEncoderInterface $passwordEncoder)
     {
 
         if ($request->isMethod('POST')) {
@@ -106,7 +110,7 @@ class SecurityController extends AbstractController
             $this->addFlash('notice', 'Mot de passe mis à jour');
 
             return $this->redirectToRoute('app_homepage');
-        }else {
+        } else {
 
             return $this->render('security/reset_password.html.twig', ['token' => $token]);
         }

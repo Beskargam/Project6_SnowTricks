@@ -91,9 +91,9 @@ class IndexController extends AbstractController
      * @Route("/ajouter", name="add")
      */
     public function trickAdd(EntityManagerInterface $manager,
-                        Request $request,
-                        ImageHandler $imageHandler,
-                        VideoHandler $videoHandler)
+                             Request $request,
+                             ImageHandler $imageHandler,
+                             VideoHandler $videoHandler)
     {
         $addTrickForm = $this->createForm(TrickType::class);
         $addTrickForm->handleRequest($request);
@@ -132,8 +132,8 @@ class IndexController extends AbstractController
      * @Route("/supprimer/trick-{id<\d+>}", name="deleteTrick")
      */
     public function trickDelete(Request $request,
-                           EntityManagerInterface $manager,
-                           Trick $trick)
+                                EntityManagerInterface $manager,
+                                Trick $trick)
     {
         $deleteTrickForm = $this->get('form.factory')->create();
 
