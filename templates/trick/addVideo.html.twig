@@ -15,19 +15,18 @@
                         <div class="col-sm-12">
                             <div class="card home-card">
                                 {{ dump(trick) }}
-                                {{ form_widget(form.videos) }}
-                                <a href="#" id="add_video" class="btn btn-warning">Ajouter une vidéo</a>
+                                {{ form_widget(form) }}
                             </div>
                         </div>
                     </div>
                     <div class="field-space">
-                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary float-right action-button-space'}}) }}
+                        <a href="{{ path('app_editTrick', {'id' : trick.id}) }}" class="btn btn-default">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Retour au Trick
+                        </a>
+                        <input class="btn btn-primary" type="submit">
                     </div>
                     {{ form_end(form) }}
-                    <a href="{{ path('app_editTrick', {'id' : trick.id}) }}" class="btn btn-default">
-                        <i class="glyphicon glyphicon-chevron-left"></i>
-                        Retour au Trick
-                    </a>
                 </div>
             </div>
         </div>

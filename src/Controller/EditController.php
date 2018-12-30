@@ -9,6 +9,7 @@ use App\Form\AddImageType;
 use App\Form\AddVideoType;
 use App\Form\ImageType;
 use App\Form\TrickType;
+use App\Form\VideoType;
 use App\Services\ImageHandler;
 use App\Services\VideoHandler;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,8 +73,7 @@ class EditController extends AbstractController
      */
     public function addImage(EntityManagerInterface $manager,
                              Request $request,
-                             Trick $trick,
-                             ImageHandler $imageHandler)
+                             Trick $trick)
     {
         $image = new Image();
         $addImageForm = $this->createForm(ImageType::class, $image);
@@ -91,7 +91,7 @@ class EditController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Enregistrement ràussi !');
+                'Enregistrement réussi !');
 
             return $this->redirectToRoute('app_editTrick', [
                 'id' => $trick->getId(),
@@ -141,26 +141,23 @@ class EditController extends AbstractController
      */
     public function addVideo(EntityManagerInterface $manager,
                              Request $request,
-                             Trick $trick,
-                             VideoHandler $videoHandler)
+                             Trick $trick)
     {
-
-        $addVideoForm = $this->createForm(AddVideoType::class);
+        $video = new Video();
+        $addVideoForm = $this->createForm(VideoType::class, $video);
         $addVideoForm->handleRequest($request);
 
         if ($request->isMethod('POST') && $addVideoForm->isValid()) {
-            $trick = $addVideoForm->getData();
 
-            // videos
-            $videos = $trick->getVideos();
-            $videoHandler->handleVideos($videos);
+            // video
+            $trick->addVideo($video);
 
             $manager->persist($trick);
             $manager->flush();
 
             $this->addFlash(
                 'success',
-                'Enregistrement ràussi !');
+                'Enregistrement réussi !');
 
             return $this->redirectToRoute('app_editTrick', [
                 'id' => $trick->getId(),

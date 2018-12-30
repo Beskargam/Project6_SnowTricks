@@ -14,20 +14,18 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card home-card">
-                                {{ dump(trick) }}
                                 {{ form_widget(form.file) }}
-                                <a href="#" id="add_image" class="btn btn-warning">Ajouter une image</a>
                             </div>
                         </div>
                     </div>
                     <div class="field-space">
-                        <input type="submit">
+                        <a href="{{ path('app_editTrick', {'id' : trick.id}) }}" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-chevron-left"></i>
+                            Retour au Trick
+                        </a>
+                        <input class="btn btn-primary" type="submit">
                     </div>
                     {{ form_end(form) }}
-                    <a href="{{ path('app_editTrick', {'id' : trick.id}) }}" class="btn btn-default">
-                        <i class="glyphicon glyphicon-chevron-left"></i>
-                        Retour au Trick
-                    </a>
                 </div>
             </div>
         </div>
