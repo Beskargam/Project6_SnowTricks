@@ -54,6 +54,8 @@ class IndexController extends AbstractController
                               Trick $trick)
 
     {
+
+
         $commentForm = $this->createForm(CommentType::class);
         $commentForm->handleRequest($request);
 

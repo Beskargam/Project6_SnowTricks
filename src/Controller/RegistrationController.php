@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use App\Entity\User;
+use App\Services\ImageHandler;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +20,10 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/enregistrement", name="register")
      */
-    public function register(Request $request,
+    public function register(EntityManagerInterface $manager,
+                             Request $request,
                              UserPasswordEncoderInterface $passwordEncoder,
+                             ImageHandler $imageHandler,
                              \Swift_Mailer $mailer): Response
     {
         $user = new User();
@@ -31,9 +35,14 @@ class RegistrationController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            // images uploads
+            $path = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
+            $image = $user->getImage();
+            $image->handle($path);
+
+
+            $manager->persist($user);
+            $manager->flush();
 
             $message = (new \Swift_Message('Confirmation d\'inscription SnowTricks'))
                 ->setFrom('zenways@laposte.net')

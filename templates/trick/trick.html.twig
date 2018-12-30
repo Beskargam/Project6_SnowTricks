@@ -110,7 +110,9 @@
                     <div class="col-sm-12">
                         <div class="card home-card">
                             <div class="card-header">
-                                {{ comment.getUser.username }}
+                                <img src="{{ asset('uploads/images/' ~ comment.user.image.name) }}"
+                                     alt="{{ comment.user.image.name }}" style="height: 60px">
+                                {{ comment.user.username }}
                             </div>
                             <div class="card-body comment-content-box">
                                 {{ comment.commentContent }}

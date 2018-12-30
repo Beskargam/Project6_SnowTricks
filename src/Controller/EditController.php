@@ -7,6 +7,7 @@ use App\Entity\Trick;
 use App\Entity\Video;
 use App\Form\AddImageType;
 use App\Form\AddVideoType;
+use App\Form\ImageType;
 use App\Form\TrickType;
 use App\Services\ImageHandler;
 use App\Services\VideoHandler;
@@ -74,16 +75,16 @@ class EditController extends AbstractController
                              Trick $trick,
                              ImageHandler $imageHandler)
     {
-
-        $addImageForm = $this->createForm(AddImageType::class);
+        $image = new Image();
+        $addImageForm = $this->createForm(ImageType::class, $image);
         $addImageForm->handleRequest($request);
 
         if ($request->isMethod('POST') && $addImageForm->isValid()) {
 
             // image uploads
             $path = $this->getParameter('kernel.project_dir') . '/public/uploads/images';
-            $images = $trick->getImages();
-            $imageHandler->handleImages($images, $path);
+            $image->handle($path);
+            $trick->addImage($image);
 
             $manager->persist($trick);
             $manager->flush();

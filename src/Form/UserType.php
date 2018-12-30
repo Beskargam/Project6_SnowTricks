@@ -40,7 +40,11 @@ class UserType extends AbstractType
                         'placeholder' => 'Contfirmer mot de passe'
                     ]
                 ],
-            ]);
+            ])->add('image', ImageType::class, [
+                'required' => true,
+                'label' => 'Avatar : ',
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

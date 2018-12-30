@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +42,8 @@ class SecurityController extends AbstractController
     /**
      * @Route("/oubli/motdepasse", name="forgotten_password")
      */
-    public function forgottenPassword(Request $request,
+    public function forgottenPassword(EntityManagerInterface $manager,
+                                      Request $request,
                                       UserPasswordEncoderInterface $encoder,
                                       \Swift_Mailer $mailer,
                                       TokenGeneratorInterface $tokenGenerator): Response
@@ -49,8 +51,7 @@ class SecurityController extends AbstractController
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
+            $user = $manager->getRepository(User::class)->findOneByEmail($email);
 
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
@@ -60,7 +61,7 @@ class SecurityController extends AbstractController
 
             try {
                 $user->setResetToken($token);
-                $entityManager->flush();
+                $manager->flush();
             } catch (\Exception $e) {
                 $this->addFlash('warning', $e->getMessage());
                 return $this->redirectToRoute('app_homepage');
@@ -88,15 +89,16 @@ class SecurityController extends AbstractController
     /**
      * @Route("/reinitialisation/motdepasse/{token}", name="reset_password")
      */
-    public function resetPassword(Request $request,
+    public function resetPassword(EntityManagerInterface $manager,
+                                  Request $request,
                                   string $token,
                                   UserPasswordEncoderInterface $passwordEncoder)
     {
 
         if ($request->isMethod('POST')) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $manager = $this->getDoctrine()->getManager();
 
-            $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
+            $user = $manager->getRepository(User::class)->findOneByResetToken($token);
 
             if ($user === null) {
                 $this->addFlash('danger', 'Token Inconnu');
@@ -105,9 +107,11 @@ class SecurityController extends AbstractController
 
             $user->setResetToken(null);
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
-            $entityManager->flush();
+            $manager->flush();
 
-            $this->addFlash('notice', 'Mot de passe mis à jour');
+            $this->addFlash(
+                'notice',
+                'Mot de passe mis à jour');
 
             return $this->redirectToRoute('app_homepage');
         } else {

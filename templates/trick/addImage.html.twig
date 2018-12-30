@@ -15,13 +15,13 @@
                         <div class="col-sm-12">
                             <div class="card home-card">
                                 {{ dump(trick) }}
-                                {{ form_widget(form.images) }}
+                                {{ form_widget(form.file) }}
                                 <a href="#" id="add_image" class="btn btn-warning">Ajouter une image</a>
                             </div>
                         </div>
                     </div>
                     <div class="field-space">
-                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary float-right action-button-space'}}) }}
+                        <input type="submit">
                     </div>
                     {{ form_end(form) }}
                     <a href="{{ path('app_editTrick', {'id' : trick.id}) }}" class="btn btn-default">
