@@ -105,8 +105,8 @@
         </div>
         <hr>
         <div class="row justify-content-center">
-            {% if trick.comments is defined %}
-                {% for comment in trick.comments %}
+            {% if listComments is defined %}
+                {% for comment in listComments %}
                     <div class="col-sm-12">
                         <div class="card home-card">
                             <div class="card-header">
@@ -131,7 +131,7 @@
             <ul class="pagination">
                 {% for p in range(1, nbPages) %}
                     <li{% if p == page %} class="active"{% endif %}>
-                        <a href="{{ path('app_trick', {'id' : trick.id, 'page': p}) }}">{{ p }}</a>
+                        <a href="{{ path('app_trick', { 'id' : trick.id, 'page': p}) }}">{{ p }}</a>
                     </li>
                 {% endfor %}
             </ul>
