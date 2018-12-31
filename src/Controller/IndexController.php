@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Entity\Trick;
 use App\Form\CommentType;
 use App\Form\TrickType;
+use App\Repository\CommentRepository;
 use App\Repository\TrickRepository;
 use App\Services\ImageHandler;
 use App\Services\VideoHandler;
@@ -47,14 +48,28 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/figure/{id<\d+>}", name="trick")
+     * @Route("/figure/{id<\d+>}/page-{page}", name="trick")
      */
     public function trickView(EntityManagerInterface $manager,
                               Request $request,
-                              Trick $trick)
+                              TrickRepository $trickRepository,
+                              CommentRepository $commentRepository,
+                              $id,
+                              $page)
 
     {
+        $trick = $trickRepository
+            ->getTrick($id);
 
+        if ($page < 1) {
+            throw $this->createNotFoundException("La page ".$page." n'exsite pas.");
+        }
+        $nbPerPage = 10;
+        $listComments = $commentRepository->getComments($page, $nbPerPage, $id);
+        $nbPages = ceil(count($listComments) / $nbPerPage);
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'exsite pas.");
+        }
 
         $commentForm = $this->createForm(CommentType::class);
         $commentForm->handleRequest($request);
@@ -76,12 +91,15 @@ class IndexController extends AbstractController
             );
             return $this->redirectToRoute('app_trick', [
                 'id' => $trick->getId(),
+                'page' => $page,
             ]);
         }
-
         return $this->render('trick/trick.html.twig', [
             'form' => $commentForm->createView(),
-            'trick' => $trick,
+            'trick' => $trick[0],
+            'listComments' => $listComments,
+            'nbPages' => $nbPages,
+            'page' => $page,
         ]);
     }
 

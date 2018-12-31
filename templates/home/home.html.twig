@@ -42,7 +42,7 @@
                                          alt="Card image cap">
                                 {% endfor %}
                                 <div class="card-body">
-                                    <a class="" href="{{ path('app_trick', {'id' : trick.id}) }}">{{ trick.title }}</a>
+                                    <a class="" href="{{ path('app_trick', {'id' : trick.id, 'page' : 1}) }}">{{ trick.title }}</a>
                                     {% if app.user.username is defined %}
                                         <a class="float-right"
                                            href="{{ path('app_deleteTrick', {'id' : trick.id}) }}"><span

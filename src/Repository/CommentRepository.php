@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +18,25 @@ class CommentRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Comment::class);
+    }
+
+    public function getComments($page, $nbPerPage, $id)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->leftJoin('c.trick', 't')
+            ->addSelect('t')
+            ->where('t.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('c.publishedAt', 'DESC')
+            ->getQuery()
+            ;
+
+        $query
+            ->setFirstResult(($page-1) * $nbPerPage)
+            ->setMaxResults($nbPerPage)
+            ;
+
+        return new Paginator($query, true);
     }
 
     // /**
