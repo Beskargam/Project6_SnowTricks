@@ -12,6 +12,7 @@ use App\Repository\TrickRepository;
 use App\Services\ImageHandler;
 use App\Services\VideoHandler;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,13 +63,16 @@ class IndexController extends AbstractController
             ->getTrick($id);
 
         if ($page < 1) {
-            throw $this->createNotFoundException("La page ".$page." n'exsite pas.");
+            throw $this->createNotFoundException("La page " . $page . " n'exsite pas.");
         }
         $nbPerPage = 10;
         $listComments = $commentRepository->getComments($page, $nbPerPage, $id);
         $nbPages = ceil(count($listComments) / $nbPerPage);
+        if ($nbPages < 1) {
+            $nbPages = 1;
+        }
         if ($page > $nbPages) {
-            throw $this->createNotFoundException("La page ".$page." n'exsite pas.");
+            throw $this->createNotFoundException("La page " . $page . " n'exsite pas.");
         }
 
         $commentForm = $this->createForm(CommentType::class);
@@ -96,7 +100,7 @@ class IndexController extends AbstractController
         }
         return $this->render('trick/trick.html.twig', [
             'form' => $commentForm->createView(),
-            'trick' => $trick[0],
+            'trick' => $trick,
             'listComments' => $listComments,
             'nbPages' => $nbPages,
             'page' => $page,
@@ -136,6 +140,7 @@ class IndexController extends AbstractController
 
             return $this->redirectToRoute('app_trick', [
                 'id' => $trick->getId(),
+                'page' => 1,
             ]);
         }
 
@@ -146,6 +151,7 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/supprimer/trick-{id<\d+>}", name="deleteTrick")
+     * @IsGranted("ROLE_USER")
      */
     public function trickDelete(Request $request,
                                 EntityManagerInterface $manager,

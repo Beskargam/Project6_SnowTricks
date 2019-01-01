@@ -127,14 +127,14 @@
                 <p>
                     Aucun commentaire. Soyez le premier à en écrire un !
                 </p>
-            {% endif %}
+            {% endif %}{#
             <ul class="pagination">
                 {% for p in range(1, nbPages) %}
                     <li{% if p == page %} class="active"{% endif %}>
                         <a href="{{ path('app_trick', { 'id' : trick.id, 'page': p}) }}">{{ p }}</a>
                     </li>
                 {% endfor %}
-            </ul>
+            </ul>#}
         </div>
     </div>
 {% endblock %}

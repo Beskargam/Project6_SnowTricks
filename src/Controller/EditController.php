@@ -5,14 +5,13 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\Trick;
 use App\Entity\Video;
-use App\Form\AddImageType;
-use App\Form\AddVideoType;
 use App\Form\ImageType;
 use App\Form\TrickType;
 use App\Form\VideoType;
 use App\Services\ImageHandler;
 use App\Services\VideoHandler;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +24,7 @@ class EditController extends AbstractController
 {
     /**
      * @Route("/modifier/figure-{id<\d+>}", name="editTrick")
+     * @IsGranted("ROLE_USER")
      */
     public function edit(EntityManagerInterface $manager,
                          Request $request,
@@ -70,6 +70,7 @@ class EditController extends AbstractController
 
     /**
      * @Route("/modifier/figure-{id<\d+>}/ajouter-une-image", name="addImage")
+     * @IsGranted("ROLE_USER")
      */
     public function addImage(EntityManagerInterface $manager,
                              Request $request,
@@ -107,12 +108,12 @@ class EditController extends AbstractController
 
     /**
      * @Route("/supprimer/image-{id<\d+>}", name="deleteImage")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteImage(EntityManagerInterface $manager,
                                 Request $request,
                                 Image $image)
     {
-        //$deleteImageForm = $this->createFormBuilder();
         $deleteImageForm = $this->get('form.factory')->create();
 
         if ($request->isMethod('POST') && $deleteImageForm->handleRequest($request)->isValid()) {
@@ -131,13 +132,13 @@ class EditController extends AbstractController
 
         return $this->render('trick/deleteImage.html.twig', [
             'image' => $image,
-            //'form' => $deleteImageForm->getForm()->createView(),
             'form' => $deleteImageForm->createView(),
         ]);
     }
 
     /**
      * @Route("/modifier/figure-{id<\d+>}/ajouter-une-video", name="addVideo")
+     * @IsGranted("ROLE_USER")
      */
     public function addVideo(EntityManagerInterface $manager,
                              Request $request,
@@ -173,12 +174,13 @@ class EditController extends AbstractController
 
     /**
      * @Route("/supprimer/video-{id<\d+>}", name="deleteVideo")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteVideo(EntityManagerInterface $manager,
                                 Request $request,
                                 Video $video)
     {
-        $deleteVideoForm = $this->createFormBuilder();
+        $deleteVideoForm = $this->get('form.factory')->create();
 
         if ($request->isMethod('POST') && $deleteVideoForm->handleRequest($request)->isValid()) {
             $manager->remove($video);
@@ -196,7 +198,7 @@ class EditController extends AbstractController
 
         return $this->render('trick/deleteVideo.html.twig', [
             'video' => $video,
-            'form' => $deleteVideoForm->getForm()->createView(),
+            'form' => $deleteVideoForm->createView(),
         ]);
     }
 }
