@@ -52,7 +52,7 @@ class Trick
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\GroupTrick", inversedBy="tricks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\GroupTrick", inversedBy="tricks", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $groupTrick;

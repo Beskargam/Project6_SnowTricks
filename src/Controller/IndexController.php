@@ -109,6 +109,7 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/ajouter", name="add")
+     * @IsGranted("ROLE_USER")
      */
     public function trickAdd(EntityManagerInterface $manager,
                              Request $request,
