@@ -51,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/Procfile">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="32" lean-forward="true" selection-start-column="32" selection-end-column="32" />
+              <caret column="39" selection-start-column="39" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -373,16 +373,15 @@
       <workItem from="1546876656974" duration="3284000" />
       <workItem from="1546934861239" duration="18960000" />
       <workItem from="1546970204467" duration="65000" />
-      <workItem from="1547109508336" duration="1532000" />
+      <workItem from="1547109508336" duration="1651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="248385000" />
+    <option name="totallyTimeSpent" value="248504000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="444" y="37" width="1089" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.27988338" />
       <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.13113007" />
@@ -781,7 +780,7 @@
     <entry file="file://$PROJECT_DIR$/Procfile">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="32" lean-forward="true" selection-start-column="32" selection-end-column="32" />
+          <caret column="39" selection-start-column="39" selection-end-column="39" />
         </state>
       </provider>
     </entry>
