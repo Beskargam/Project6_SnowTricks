@@ -161,12 +161,12 @@
         <option value="$PROJECT_DIR$/src/DataFixtures/VideoFixtures.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/TrickFixtures.php" />
         <option value="$PROJECT_DIR$/templates/home/home.html.twig" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/config/packages/doctrine.yaml" />
         <option value="$PROJECT_DIR$/config/packages/prod/monolog.yaml" />
         <option value="$PROJECT_DIR$/.Procfile" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/Procfile" />
+        <option value="$PROJECT_DIR$/.env" />
       </list>
     </option>
   </component>
@@ -359,12 +359,12 @@
       <workItem from="1546934861239" duration="18960000" />
       <workItem from="1546970204467" duration="65000" />
       <workItem from="1547109508336" duration="1651000" />
-      <workItem from="1547111205909" duration="2823000" />
+      <workItem from="1547111205909" duration="3091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251327000" />
+    <option name="totallyTimeSpent" value="251595000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="828" y="0" width="1089" height="1047" extended-state="0" />
