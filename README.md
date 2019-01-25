@@ -13,6 +13,6 @@ installation guide :
     Update the DATABASE_URL in your .env file
     Run a Doctrine migration to create the tables (php bin/console doctrine:migrations:migrate or php bin/console d:m:m)
     Load a couple of fake articles with the fixtures load (php bin/console doctrine:fixtures:load or php bin/console d:f:l)
-    Run the app on your local !
+    Run the app on your localhost with the Symfony developpement server ! (cd project -> php bin/console server:run)
 
 Website : ...
