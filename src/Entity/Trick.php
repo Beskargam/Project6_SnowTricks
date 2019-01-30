@@ -24,7 +24,7 @@ class Trick
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=40, unique=true)
      * @Assert\NotBlank(message="Le Trick doit avoir un Nom")
      * @Assert\Length(
      *      min = 2,

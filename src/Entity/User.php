@@ -36,7 +36,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=40, unique=true)
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 8,
@@ -55,13 +55,13 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=40)
      */
     private $password;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=191, nullable=true)
      */
     protected $resetToken;
 
