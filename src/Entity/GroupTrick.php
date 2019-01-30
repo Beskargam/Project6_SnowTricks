@@ -19,7 +19,7 @@ class GroupTrick
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=191, unique=true)
+     * @ORM\Column(type="string", length=190, unique=true)
      */
     private $name;
 
