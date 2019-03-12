@@ -17,4 +17,4 @@ installation guide :
     Load a couple of fake articles with the fixtures load (php bin/console doctrine:fixtures:load or php bin/console d:f:l)
     Run the app on your localhost with the Symfony developpement server ! (cd project -> php bin/console server:run)
 
-Website : https://arcturusmorea.planethoster.world/
+Website : https://app-snowtricks.herokuapp.com/
